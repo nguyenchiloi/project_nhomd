@@ -4,6 +4,7 @@ import Rout from './rout';
 import {BrowserRouter} from 'react-router-dom';
 import Footer from './footer';
 import Productdetail from './productdetail';
+import { ToastContainer } from 'react-toastify';
 const App = () => {
   // add to cart
   const [cart, setCart] = useState([])
@@ -47,6 +48,7 @@ const App = () => {
   console.log(cart)
   return (
     <>
+    <ToastContainer></ToastContainer>
     <BrowserRouter>
     <Nav searchbtn={searchbtn}/>
     <Rout product={product} setProduct={setProduct} detail={detail} view={view} close={close} setClose={setClose} cart={cart} setCart={setCart} addtocart={addtocart}/>
