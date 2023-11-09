@@ -2,7 +2,7 @@ import { Button, Col, Form, Input, Row, message } from "antd";
 import React, { useState } from "react";
 import { UserOutlined } from '@ant-design/icons';
 import './login.css';
-import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
     const [name, setName] = useState("");
@@ -10,6 +10,7 @@ const Register = () => {
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [r_password, setRpassword] = useState("");
+    const usenavigate = useNavigate();
     const [messageApi, contextHolder] = message.useMessage();
     const success = () => {
         messageApi.open({
@@ -17,10 +18,10 @@ const Register = () => {
             content: 'Đăng ký thành công',
         });
     };
-    const error = () => {
+    const error = (message) => {
         messageApi.open({
             type: 'error',
-            content: 'Đăng ký thất bại',
+            content: message ? message : 'Đăng ký thất bại',
         });
     };
     const handlesubmit = (e) => {
@@ -30,11 +31,13 @@ const Register = () => {
             method: "POST",
             headers: { 'content-Type': 'application/json' },
             body: JSON.stringify(regobj)
-        }).then((res) => {
-            if (res.success)
+        }).then(res => res.json()).then(data => {
+            if (data.success) {
+                usenavigate('/login');
                 success();
-            else
-                error();
+            } else {
+                error(data.message);
+            }
         }).catch((err) => {
             error();
         })
@@ -47,32 +50,36 @@ const Register = () => {
                 <Form onFinish={handlesubmit}>
                     <Row gutter={[16, 8]}>
                         <Col span={6} offset={9}>
-                            <Form.Item rules={[{ required: true, message: 'vui lòng nhập tên' }]}>
-                                <Input size="large" placeholder="Nhập name" prefix={<UserOutlined />} value={name} onChange={e => setName(e.target.value)} />
+                            <Form.Item rules={[{ required: true, message: 'vui lòng nhập tên' }]} name="name">
+                                <Input size="large" placeholder="Nhập name" prefix={<UserOutlined />} name="name" value={name} onChange={e => setName(e.target.value)} />
                             </Form.Item>
                         </Col>
                         <Col span={6} offset={9}>
-                            <Form.Item rules={[{ required: true, message: 'vui lòng nhập email' }]}>
-                                <Input size="large" placeholder="Nhập gmail" prefix={<UserOutlined />} value={email} onChange={e => setGmail(e.target.value)} />
+                            <Form.Item rules={[{ required: true, message: 'vui lòng nhập email' }]} name="email">
+                                <Input size="large" placeholder="Nhập gmail" prefix={<UserOutlined />} name="email" value={email} onChange={e => setGmail(e.target.value)} />
                             </Form.Item>
                         </Col>
                         <Col span={6} offset={9}>
-                            <Form.Item rules={[{ required: true, message: 'vui lòng nhập số điện thoại' }]}>
-                                <Input size="large" placeholder="Nhập phone" prefix={<UserOutlined />} value={phone} onChange={e => setPhone(e.target.value)} />
+                            <Form.Item rules={[{ required: true, message: 'vui lòng nhập số điện thoại' }]} name="phone">
+                                <Input type="tel" pattern="[0-9]{10}" size="large" placeholder="Nhập phone" prefix={<UserOutlined />} name="phone" value={phone} onChange={e => setPhone(e.target.value)} />
                             </Form.Item>
                         </Col>
                         <Col span={6} offset={9}>
-                            <Form.Item rules={[{ required: true, message: 'vui lòng nhập mật khẩu' }]}>
-                                <Input type="password" size="large" placeholder="Nhập mật khẩu" prefix={<UserOutlined />} value={password} onChange={e => setPassword(e.target.value)} />
+                            <Form.Item rules={[{ required: true, message: 'vui lòng nhập mật khẩu' }]} name="password">
+                                <Input type="password" size="large" placeholder="Nhập mật khẩu" prefix={<UserOutlined />} name="password" value={password} onChange={e => setPassword(e.target.value)} />
                             </Form.Item>
                         </Col>
                         <Col span={6} offset={9}>
-                            <Form.Item rules={[{ required: true, message: 'vui lòng nhập lại mật khẩu' }]} >
-                                <Input type="password" size="large" placeholder="Nhập lại mật khẩu" prefix={<UserOutlined />} value={r_password} onChange={e => setRpassword(e.target.value)} />
+                            <Form.Item rules={[{ required: true, message: 'vui lòng nhập lại mật khẩu' }]} name="r_password">
+                                <Input type="password" size="large" placeholder="Nhập lại mật khẩu" prefix={<UserOutlined />} name="r_password" value={r_password} onChange={e => setRpassword(e.target.value)} />
                             </Form.Item>
                         </Col>
+
                         <Col span={6} offset={9}>
                             <Button type="primary" htmlType="submit">Đăng ký</Button>
+                        </Col>
+                        <Col span={6} offset={7}>
+                            <Link to={'/login'}>Đăng nhập</Link>
                         </Col>
                     </Row>
                 </Form>

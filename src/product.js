@@ -9,26 +9,35 @@ import axios from 'axios';
 const Product = ({product, setProduct, detail, view, close, setClose, addtocart}) => {
     const { loginWithRedirect,isAuthenticated} = useAuth0();
     const [listProduct, setListProduct] = useState([]);
+    const [listCategory, setListCategogy] = useState([]);
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/api/products`)
             .then(res => {
-                const persons = res.data.data;
+                const persons = res.data;
                 setListProduct(persons);
-                console.log(persons);
+            })
+            .catch(error => console.log(error));
+    }, [])
+    useEffect(() => {
+        axios.get(`http://127.0.0.1:8000/api/categories`)
+            .then(res => {
+                const persons = res.data;
+                setListCategogy(persons);
             })
             .catch(error => console.log(error));
     }, [])
     const filtterproduct = (product) =>
     {
-        const update = Productdetail.filter((x) => 
+        const update = listProduct.filter((x) => 
         {
-           return x.Cat === product;
+           return x.category_id === product;
         })
-        setProduct(update);
+        setListProduct(update);
     }
+    
     const AllProducts = () => 
     {
-        setProduct(Productdetail)
+        const list = listProduct;
     }
   return (
     <>
@@ -69,11 +78,11 @@ const Product = ({product, setProduct, detail, view, close, setClose, addtocart}
                     <h3>categories</h3>
                     <ul>
                     <li onClick={() => AllProducts ()}>All Products</li>
-                        <li onClick={() => filtterproduct ("Tablet")}>Tablet</li>
-                        <li onClick={() => filtterproduct ("Smart Watch")}>Smart Watch</li>
-                        <li onClick={() => filtterproduct ("Headphone")}>Headphone</li>
-                        <li onClick={() => filtterproduct ("Camera")}>Camera</li>
-                        <li onClick={() => filtterproduct ("Gaming")}>Gaming</li>
+                        <li onClick={() => filtterproduct (1)}>Màn hình</li>
+                        <li onClick={() => filtterproduct (2)}>Điện thoại</li>
+                        <li onClick={() => filtterproduct (3)}>Chuột Gaming</li>
+                        <li onClick={() => filtterproduct (4)}>Tai nghe</li>
+                        <li onClick={() => filtterproduct (5)}>Bàn phím</li>
                     </ul>
                 </div>
             </div>
@@ -99,7 +108,7 @@ const Product = ({product, setProduct, detail, view, close, setClose, addtocart}
                                           </div>
                                         </div>
                                         <div className='detail'>
-                                          <p>{value.name}</p>
+                                          <p>{value.category.name}</p>
                                           <h3>{value.name}</h3>
                                           <h4>${value.money}</h4>
                                         </div>

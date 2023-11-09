@@ -6,6 +6,7 @@ import Cart from './cart'
 import Contact from './contact'
 import Login from './login'
 import Register from './register'
+import ResetPassword from './resetPassword'
 const Rout = ({product, setProduct, detail, view, close, setClose, cart, setCart, addtocart}) => {
   return (
     <>
@@ -16,6 +17,7 @@ const Rout = ({product, setProduct, detail, view, close, setClose, cart, setCart
         <Route path='/contact' element={<Contact />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/resetpassword' element={<ResetPassword />} />
     </Routes>
     </>
   )
