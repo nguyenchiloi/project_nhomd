@@ -1,11 +1,13 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import Nav from './nav'
 import Rout from './rout';
-import {BrowserRouter} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import Footer from './footer';
 import Productdetail from './productdetail';
-import { ToastContainer } from 'react-toastify';
+import RoutAdmin from './routAdmin';
 const App = () => {
+  const [isAuthen, setIsAuthen] = useState(false);
+const type = localStorage.getItem('type');
   // add to cart
   const [cart, setCart] = useState([])
   //product Detail
@@ -13,47 +15,40 @@ const App = () => {
   const [detail, setDetail] = useState([])
   //filter product
   const [product, setProduct] = useState(Productdetail)
-  const searchbtn = (product) => 
-  {
-    const change = Productdetail.filter((x) => 
-    {
+  const searchbtn = (product) => {
+    const change = Productdetail.filter((x) => {
       return x.Cat === product
     })
     setProduct(change)
   }
   //product detail
-  const view = (product) => 
-  {
-    setDetail([{...product}])
+  const view = (product) => {
+    setDetail([{ ...product }])
     setClose(true)
   }
 
   // add to cart
-  const addtocart = (product) => 
-  {
-    const exsit = cart.find((x) => 
-    {
+  const addtocart = (product) => {
+    const exsit = cart.find((x) => {
       return x.id === product.id
     })
-    if(exsit)
-    {
+    if (exsit) {
       alert("This Product is already added to cart")
     }
-    else
-    { 
-      setCart([...cart, {...product, qty:1}])
+    else {
+      setCart([...cart, { ...product, qty: 1 }])
       alert("product is added to cart")
     }
-  } 
-  console.log(cart)
+  }
   return (
     <>
-    <ToastContainer></ToastContainer>
-    <BrowserRouter>
-    <Nav searchbtn={searchbtn}/>
-    <Rout product={product} setProduct={setProduct} detail={detail} view={view} close={close} setClose={setClose} cart={cart} setCart={setCart} addtocart={addtocart}/>
-    <Footer />
-    </BrowserRouter>
+      <BrowserRouter>
+        <Nav isAuthen={isAuthen} setIsAuthen={setIsAuthen} searchbtn={searchbtn} />  
+          <>
+            <Rout setIsAuthen={setIsAuthen} product={product} setProduct={setProduct} detail={detail} view={view} close={close} setClose={setClose} cart={cart} setCart={setCart} addtocart={addtocart} />
+            <Footer />
+          </>
+      </BrowserRouter>
     </>
   )
 }
