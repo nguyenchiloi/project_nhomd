@@ -1,14 +1,17 @@
 import { Button, Col, Form, Input, Row, message } from "antd";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { UserOutlined } from '@ant-design/icons';
 import './login.css';
 import { Link, useNavigate } from "react-router-dom";
-const Login = () => {
-    const [email, setEmail] = useState("");
+const Login = ({ setIsAuthen }) => {
+        
+    const [email,setEmail] = useState("");
     const [password, setPassword] = useState("");
     const usenavigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [messageApi, contextHolder] = message.useMessage();
+    const memoizedToken = useMemo(() => localStorage.getItem('token'), []);
+    const [token, setToken] = useState(memoizedToken);
+
     const success = () => {
         messageApi.open({
             type: 'success',
@@ -18,51 +21,63 @@ const Login = () => {
     const error = (message) => {
         messageApi.open({
             type: 'error',
-            content: 'Đăng nhập thất bại',
+            content: 'Bạn đã nhập sai email hoặc mật khẩu',
         });
     };
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         let regobj = { email, password };
-        if (validate()) {
-            const response = fetch('http://127.0.0.1:8000/api/login', {
-                method: 'POST',
-                headers: { 'content-Type': 'application/json' },
-                body: JSON.stringify(regobj)
-            }).then(res => res.json()).then(data => {
-                if (data.success) {
-                    success();
-                    usenavigate('/');
-                } else {
-                    error(data.message);
+        fetch('http://127.0.0.1:8000/api/login', {
+            method: 'POST',
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify(regobj)
+        }).then(res => res.json()).then(data => {
+            if (data.success) {
+                success();
+                localStorage.setItem('token', data.data.token);
+                localStorage.setItem('type', data.data.type);
+                localStorage.setItem('name', data.data.name);
+                setIsAuthen(data.data);
+                if (data.data.type === 1) {
+                    usenavigate('/managers')
                 }
-            }).catch((err) => {
-                error();
-            })
-        }
+                if (data.data.type === 2) {
+                    usenavigate('/');
+                }
+            } else {
+                error(data.message);
+            }
+        }).catch((err) => {
+            error();
+        })
 
-    }
-    const validate = () => {
-        let result = true;
-        if (email === '' || email === null) {
-            result = false;
-        }
-        if (password === '' || password === null) {
-            result = false;
-        }
-        return result;
     }
     return (
         <>
             {contextHolder}
+
             <div className="khungLogin">
                 <h2>Login</h2>
                 <Form onFinish={handleSubmit}>
                     <Row gutter={[16, 8]}>
                         <Col span={6} offset={9}>
-                            <Input size="large" placeholder="Nhập gmail" prefix={<UserOutlined />} value={email} onChange={e => setEmail(e.target.value)} />
+                            <Form.Item rules={[{
+                                required: true,
+                                message: "Vui lòng nhập email",
+                            },
+                            {
+                                pattern: "^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
+                                message: "Email không hợp lệ",
+                            }]} name="email">
+                                <Input size="large" placeholder="Nhập gmail" prefix={<UserOutlined />} value={email} onChange={e => setEmail(e.target.value)} />
+                            </Form.Item>
                         </Col>
                         <Col span={6} offset={9}>
-                            <Input type="password" size="large" placeholder="Nhập mật khẩu" prefix={<UserOutlined />} value={password} onChange={e => setPassword(e.target.value)} />
+                            <Form.Item rules={[{
+                                required: true,
+                                message: "Vui lòng nhập password",
+                            }]} name="password">
+                                <Input type="password" size="large" placeholder="Nhập mật khẩu" prefix={<UserOutlined />} value={password} onChange={e => setPassword(e.target.value)} />
+                            </Form.Item>
                         </Col>
                         <Col span={6} offset={9}>
                             <Button type="primary" htmlType="submit">Đăng nhập</Button>
@@ -75,9 +90,9 @@ const Login = () => {
                         </Col>
                     </Row>
                 </Form>
+            </div >
 
 
-            </div>
         </>
     )
 }

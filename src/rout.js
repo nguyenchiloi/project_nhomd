@@ -7,7 +7,10 @@ import Contact from './contact'
 import Login from './login'
 import Register from './register'
 import ResetPassword from './resetPassword'
-const Rout = ({product, setProduct, detail, view, close, setClose, cart, setCart, addtocart}) => {
+import ProductManager from './compoment/productManager'
+import Managers from './compoment/managers'
+import About from './about'
+const Rout = ({setIsAuthen,product, setProduct, detail, view, close, setClose, cart, setCart, addtocart}) => {
   return (
     <>
     <Routes>
@@ -15,9 +18,12 @@ const Rout = ({product, setProduct, detail, view, close, setClose, cart, setCart
         <Route path='/product' element={<Product product={product} setProduct={setProduct} detail={detail} view={view} close={close} setClose={setClose} addtocart={addtocart}/>} />
         <Route path='/cart' element={<Cart cart={cart} setCart={setCart} />} />
         <Route path='/contact' element={<Contact />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/about' element={<About /> }/>
+        <Route path='/login' element={<Login setIsAuthen={setIsAuthen} />} />
         <Route path='/register' element={<Register />} />
         <Route path='/resetpassword' element={<ResetPassword />} />
+        <Route path='/productManager' element={<ProductManager />} />
+        <Route path='/managers' element={<Managers />} />
     </Routes>
     </>
   )

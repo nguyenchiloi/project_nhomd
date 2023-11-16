@@ -42,6 +42,7 @@ const Register = () => {
             error();
         })
     }
+
     return (
         <>
             {contextHolder}
@@ -55,13 +56,31 @@ const Register = () => {
                             </Form.Item>
                         </Col>
                         <Col span={6} offset={9}>
-                            <Form.Item rules={[{ required: true, message: 'vui lòng nhập email' }]} name="email">
+                            <Form.Item rules={[
+                                {
+                                    required: true,
+                                    message: "Vui lòng nhập email",
+                                },
+                                {
+                                    pattern: "^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
+                                    message: "Email không hợp lệ",
+                                },
+                            ]} name="email" >
                                 <Input size="large" placeholder="Nhập gmail" prefix={<UserOutlined />} name="email" value={email} onChange={e => setGmail(e.target.value)} />
                             </Form.Item>
                         </Col>
                         <Col span={6} offset={9}>
-                            <Form.Item rules={[{ required: true, message: 'vui lòng nhập số điện thoại' }]} name="phone">
-                                <Input type="tel" pattern="[0-9]{10}" size="large" placeholder="Nhập phone" prefix={<UserOutlined />} name="phone" value={phone} onChange={e => setPhone(e.target.value)} />
+                            <Form.Item rules={[
+                                {
+                                    required: true,
+                                    message: "Vui lòng nhập số điện thoại",
+                                },
+                                {
+                                    pattern: "\\d{10}",
+                                    message: "Số điện thoại phải bao gồm 10 chữ số",
+                                },
+                            ]} name="phone">
+                                <Input size="large" placeholder="Nhập phone" prefix={<UserOutlined />} name="phone" value={phone} onChange={e => setPhone(e.target.value)} />
                             </Form.Item>
                         </Col>
                         <Col span={6} offset={9}>
