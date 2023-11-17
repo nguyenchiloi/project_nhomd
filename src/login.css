@@ -1,8 +1,17 @@
 .khungLogin{
-    margin:50px;
+    padding:50px;
     text-align: center;
+    background-color: #2b2b2b;
+    border-bottom: 1px solid #9a9a9a;
 }
 .khungLogin h2{
     text-align: center;
-    margin:20px
+    margin:20px;
+    color: white;
+}
+.link-css{
+    color: white;
+}
+.btn-login{
+    background-color: rgb(104, 99, 92);
 }

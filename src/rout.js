@@ -15,7 +15,7 @@ const Rout = ({setIsAuthen,product, setProduct, detail, view, close, setClose, c
     <>
     <Routes>
         <Route path='/' element={<Home detail={detail} view={view} close={close} setClose={setClose} addtocart={addtocart}/>}/>
-        <Route path='/product' element={<Product product={product} setProduct={setProduct} detail={detail} view={view} close={close} setClose={setClose} addtocart={addtocart}/>} />
+        <Route path='/product' element={<Product detail={detail} view={view} close={close} setClose={setClose} addtocart={addtocart}/>} />
         <Route path='/cart' element={<Cart cart={cart} setCart={setCart} />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/about' element={<About /> }/>

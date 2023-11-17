@@ -6,6 +6,7 @@ import {
   UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
+  UnorderedListOutlined
 } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
@@ -31,7 +32,7 @@ const Managers = () => {
   }, [])
 
   return (
-    <div style={{ margin: 50 }}>
+    <div style={{ padding: 50, background: "#423f3e" }}>
       <Layout>
         <Sider trigger={null} collapsible collapsed={collapsed}>
           <div className="demo-logo-vertical" />
@@ -48,14 +49,14 @@ const Managers = () => {
               },
               {
                 key: '2',
-                icon: <UserOutlined />,
-                label: 'nav 2',
+                icon: <UnorderedListOutlined />,
+                label: 'Quản lý danh mục',
                 onClick: () => setContent(2),
               },
               {
                 key: '3',
-                icon: <UploadOutlined />,
-                label: 'nav 3',
+                icon: <UserOutlined />,
+                label: 'Quản lý user',
                 onClick: () => setContent(3),
               },
             ]}
