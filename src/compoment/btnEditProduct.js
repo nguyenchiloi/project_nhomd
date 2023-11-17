@@ -23,7 +23,14 @@ const BtnEditProduct = ({ _ ,id,productapi}) => {
     const [description, setDescription] = useState(_.description);
     const [category_id, setCategory_id] = useState(_.category_id);
     const [messageApi, contextHolder] = message.useMessage();
-    const photo = fileList;
+    const [photo, setPhoto] = useState("");
+    useEffect(() => {
+        if (fileList.length > 0) {
+          setPhoto(fileList[0]?.name);
+        } else {
+          setPhoto(_.photo)
+        }
+      }, [fileList, _.photo]);
     const success = () => {
         messageApi.open({
             type: 'success',
@@ -45,10 +52,8 @@ const BtnEditProduct = ({ _ ,id,productapi}) => {
                 description: _.description,
                 photo: _.photo
             });
-            setFileList(_.photo)
         }
     }, [_]);
-    console.log(fileList);
     const handlesubmit = async (e) => {
         let regobj = { name, description, money, photo, category_id };
         const response = await fetch(`http://127.0.0.1:8000/api/admin/products/update/${id}`, {
@@ -137,7 +142,7 @@ const BtnEditProduct = ({ _ ,id,productapi}) => {
                             <Form.Item
                                 name="photo"
                                 label="Hình ảnh:"
-                                rules={[{ required: true, message: 'vui lòng nhập hoặc chọn file ảnh' }]}
+                                rules={[{ required: true, message: 'vui lòng chọn file ảnh' }]}
                             >
                                 <Upload
                                     listType="picture-circle"
@@ -169,7 +174,7 @@ const BtnEditProduct = ({ _ ,id,productapi}) => {
                                     onChange={handleChangeCategory}
                                     options={[
                                         { value: 1, label: 'Màn hình' },
-                                        { value: 2, label: 'Điện thoải' },
+                                        { value: 2, label: 'Điện thoại' },
                                         { value: 3, label: 'Chuột Gaming' },
                                         { value: 4, label: 'Tai nghe' },
                                         { value: 5, label: 'Bàn phím' },

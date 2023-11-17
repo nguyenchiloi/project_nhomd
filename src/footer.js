@@ -14,7 +14,7 @@ const Footer = () => {
                     <img src='./img/logo-cnsg.png' alt='logo'></img>
                 </div>
                 <div className='detail'>
-                    <p>We are a team of designers and developers that create high quality WordPress</p>
+                    <p>Hãy đến với công nghệ sài gòn để cập nhật công nghệ và mua những món hàng uy tín chất lượng</p>
                     <div className='icon'>
                         <li><RiFacebookFill /></li>
                         <li><AiOutlineInstagram /></li>
