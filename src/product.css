@@ -32,7 +32,11 @@
 }
 .products .container .filter
 {
+
     padding: 20px 30px;
+}
+.products .container .filter .categories{
+    width: 150px;
 }
 .products .container .filter .categories h3
 {
@@ -56,13 +60,14 @@
 {
     margin-right: 0%;
 }
-.products .container .productbox .contant
+.products .container .productbox
 {
+    padding-left: 100px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
-.products .container .productbox .contant .box
+.products .container .productbox .box
 {
     padding: 10px 20px;
     overflow: hidden;
@@ -75,23 +80,22 @@
     border-radius: 5px;
     margin-right: 20px;
 }
-.products .container .productbox .contant .box:hover
+.products .container .productbox .box:hover
 {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-.products .container .productbox .contant .box .img_box
+.products .container .productbox .box .img_box
 {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #e2e0e0;
 }
-.products .container .productbox .contant .box .img_box img
+.products .container .productbox .box .img_box img
 {
-    width: 300px;
     height: 250px;
-    margin-right: 50px;
+    margin-right: 300px;
 }
-.products .container .productbox .contant .box .img_box .icon
+.products .container .productbox .box .img_box .icon
 {
     z-index: 1;
     position: relative;
@@ -101,11 +105,11 @@
     margin-top: 20px;
     transition: 0.5s;
 }
-.products .container .productbox .contant .box:hover .img_box .icon
+.products .container .productbox .box:hover .img_box .icon
 {
-    transform: translateX(-130px);
+    transform: translateX(-30px);
 }
-.products .container .productbox .contant .box .img_box .icon li
+.products .container .productbox .box .img_box .icon li
 {
     list-style: none;
     padding: 10px 10px;
@@ -116,27 +120,27 @@
     transition: 0.5s;
     font-size: 18px;
 }
-.products .container .productbox .contant .box .img_box .icon li:hover
+.products .container .productbox .box .img_box .icon li:hover
 {
     background: #0989ff;
     color: #fff;
 }
-.products .container .productbox .contant .box .detail
+.products .container .productbox .box .detail
 {
     margin-top: 10px;
 }
-.products .container .productbox .contant .box .detail h3
+.products .container .productbox .box .detail h3
 {
     font-size: 16px;
     margin-top: 5px;
     color: #010f1c;
     transition: 0.5s;
 }
-.products .container .productbox .contant .box:hover .detail h3
+.products .container .productbox .box:hover .detail h3
 {
     color: #0989ff;
 }
-.products .container .productbox .contant .box .detail h4
+.products .container .productbox .box .detail h4
 {
     margin-top: 5px;
     font-size: 14px;

@@ -157,7 +157,7 @@ const BtnAddProduct = ({ productapi }) => {
                                     onChange={handleChangeCategory}
                                     options={[
                                         { value: 1, label: 'Màn hình' },
-                                        { value: 2, label: 'Điện thoải' },
+                                        { value: 2, label: 'Điện thoại' },
                                         { value: 3, label: 'Chuột Gaming' },
                                         { value: 4, label: 'Tai nghe' },
                                         { value: 5, label: 'Bàn phím' },

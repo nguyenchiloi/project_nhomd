@@ -21,7 +21,7 @@ const ResetPassword = () => {
     const handleSubmit = async (e) => {
         let regobj = { email };
         if (validate()) {
-            const response = fetch('http://127.0.0.1:8000/api/user/send-reset-password-email',{
+            fetch('http://127.0.0.1:8000/api/user/send-reset-password-email',{
                 method: 'POST',
                 headers: { 'content-Type': 'application/json' },
                 body: JSON.stringify(regobj)

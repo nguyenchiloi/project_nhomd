@@ -1,23 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Nav from './nav'
 import Rout from './rout';
 import { BrowserRouter } from 'react-router-dom';
 import Footer from './footer';
 import Productdetail from './productdetail';
-import RoutAdmin from './routAdmin';
+import axios from 'axios';
+
 const App = () => {
   const [isAuthen, setIsAuthen] = useState(false);
-const type = localStorage.getItem('type');
+  const type = localStorage.getItem('type');
   // add to cart
-  const [cart, setCart] = useState([])
+  const [cart, setCart] = useState([]);
   //product Detail
-  const [close, setClose] = useState(false)
+  const [close, setClose] = useState(false);
   const [detail, setDetail] = useState([])
   //filter product
-  const [product, setProduct] = useState(Productdetail)
-  const searchbtn = (product) => {
-    const change = Productdetail.filter((x) => {
-      return x.Cat === product
+  const [product, setProduct] = useState([])
+  const searchbtn = (productname) => {
+    const change = product.filter((x) => {
+      return x.name === productname
     })
     setProduct(change)
   }
@@ -26,7 +27,6 @@ const type = localStorage.getItem('type');
     setDetail([{ ...product }])
     setClose(true)
   }
-
   // add to cart
   const addtocart = (product) => {
     const exsit = cart.find((x) => {
@@ -43,11 +43,11 @@ const type = localStorage.getItem('type');
   return (
     <>
       <BrowserRouter>
-        <Nav isAuthen={isAuthen} setIsAuthen={setIsAuthen} searchbtn={searchbtn} />  
-          <>
-            <Rout setIsAuthen={setIsAuthen} product={product} setProduct={setProduct} detail={detail} view={view} close={close} setClose={setClose} cart={cart} setCart={setCart} addtocart={addtocart} />
-            <Footer />
-          </>
+        <Nav isAuthen={isAuthen} setIsAuthen={setIsAuthen} searchbtn={searchbtn} />
+        <>
+          <Rout setIsAuthen={setIsAuthen} product={product} setProduct={setProduct} detail={detail} view={view} close={close} setClose={setClose} cart={cart} setCart={setCart} addtocart={addtocart} />
+          <Footer />
+        </>
       </BrowserRouter>
     </>
   )
