@@ -27,8 +27,7 @@ const ProductManager = () => {
     const handleSubmitSearch = (e)=>{
         axios.get(`http://127.0.0.1:8000/api/products/search?keyword=${keysearch}`)
             .then(res=>{
-                const persons = res.data.products;
-                console.log(persons);
+                const persons = res.data.data;
                 setListProduct(persons);
             })
             .catch(error => console.log(error))
