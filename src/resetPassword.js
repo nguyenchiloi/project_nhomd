@@ -56,10 +56,10 @@ const ResetPassword = () => {
                             <Input size="large" placeholder="Nhập gmail" prefix={<UserOutlined />} value={email} onChange={e => setEmail(e.target.value)} />
                         </Col>
                         <Col span={6} offset={9}>
-                            <Button type="primary" htmlType="submit">Gửi</Button>
+                            <Button type="primary" htmlType="submit" className="btn-login">Gửi</Button>
                         </Col>
                         <Col span={7} offset={6}>
-                            <Link to={'/login'}>Login</Link>
+                            <Link to={'/login'} className="link-css">Login</Link>
                         </Col>
                     </Row>
                 </Form>

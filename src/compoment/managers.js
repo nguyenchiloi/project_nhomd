@@ -32,7 +32,7 @@ const Managers = () => {
   }, [])
 
   return (
-    <div style={{ margin: 50 }}>
+    <div style={{ padding: 50, background: "#423f3e" }}>
       <Layout>
         <Sider trigger={null} collapsible collapsed={collapsed}>
           <div className="demo-logo-vertical" />

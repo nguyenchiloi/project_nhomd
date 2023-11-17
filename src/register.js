@@ -95,10 +95,10 @@ const Register = () => {
                         </Col>
 
                         <Col span={6} offset={9}>
-                            <Button type="primary" htmlType="submit">Đăng ký</Button>
+                            <Button type="primary" htmlType="submit" className="btn-login">Đăng ký</Button>
                         </Col>
                         <Col span={6} offset={7}>
-                            <Link to={'/login'}>Đăng nhập</Link>
+                            <Link to={'/login'} className="link-css">Đăng nhập</Link>
                         </Col>
                     </Row>
                 </Form>

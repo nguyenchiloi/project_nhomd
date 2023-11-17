@@ -71,7 +71,7 @@ const Nav = ({ isAuthen, setIsAuthen, searchbtn }) => {
                     <Col md={2}>
                         {
                             token ?
-                                <button onClick={() => { localStorage.removeItem('name'); localStorage.removeItem('type'); localStorage.removeItem('token'); usenavigate('/'); setToken(false); setIsAuthen(false) }}><LogoutOutlined style={{ fontSize: 30, color: 'white' }} /> </button>
+                                <button onClick={() => { localStorage.removeItem('name'); localStorage.removeItem('type'); localStorage.removeItem('token'); usenavigate('/'); setToken(false); setIsAuthen(false) }} style={{border: 'none' , background: '#101010'}}><LogoutOutlined style={{ fontSize: 30, color: 'white' }} /> </button>
                                 :
                                 <Link to='/login'><span><LoginOutlined style={{ fontSize: 30, color: "white" }} /></span></Link>
                         }

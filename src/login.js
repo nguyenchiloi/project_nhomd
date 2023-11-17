@@ -80,13 +80,13 @@ const Login = ({ setIsAuthen }) => {
                             </Form.Item>
                         </Col>
                         <Col span={6} offset={9}>
-                            <Button type="primary" htmlType="submit">Đăng nhập</Button>
+                            <Button type="primary" htmlType="submit" className="btn-login" size="large">Đăng nhập</Button>
                         </Col>
                         <Col span={6} offset={7}>
-                            <Link to={'/register'}>Đăng ký</Link>
+                            <Link to={'/register'} className="link-css">Đăng ký !!!</Link>
                         </Col>
                         <Col span={6} offset={7}>
-                            <Link to={'/resetpassword'}>Lấy lại mật khẩu</Link>
+                            <Link to={'/resetpassword'}  className="link-css">Lấy lại mật khẩu !!!</Link>
                         </Col>
                     </Row>
                 </Form>
