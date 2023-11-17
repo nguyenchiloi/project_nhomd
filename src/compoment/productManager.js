@@ -134,7 +134,7 @@ const ProductManager = () => {
                 </Row>
             </Form>
 
-            <Table pagination={{ pageSize: 5, current: page, onChange: (e) => setPage(e) }} columns={columns} dataSource={data} style={{ margin: 50 }} />
+            <Table pagination={{ pageSize: 5, current: page, onChange: (e) => setPage(e) }} columns={columns} dataSource={data} style={{ padding: 50}} />
         </>
     )
 }
