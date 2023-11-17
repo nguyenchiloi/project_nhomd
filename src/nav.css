@@ -7,9 +7,9 @@
 }
 .free
 {
-    padding: 10px 30px;
+    padding-left: 44%;
     width: 100%;
-    background: #010f1c;
+    background: black;
     display: flex;
 }
 .free .icon
@@ -30,6 +30,7 @@
     padding: 30px 40px;
     width: 100%;
     border-bottom: 1px solid #010f1c;
+    background-color: #101010;
 }
 .main_header .container
 {
@@ -43,19 +44,10 @@
 .main_header .container .search_box input
 {
     outline: none;
-    padding: 10px 30px;
+    padding: 8px 30px;
     border: 3px solid #0989ff;
     width: 300px;
     color: #010f1c;
-}
-.main_header .container .search_box button
-{
-    border: 3px solid #0989ff;
-    outline: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    background: #0989ff;
-    color: #ecf2f7;
 }
 .main_header .container .icon
 {
@@ -83,12 +75,16 @@
 {
     display: flex;
 }
-.main_header .container .icon .second_icon .link
+.main_header .link
 {
-    margin-right: 5px;
-    font-size: 22px;
+    font-size: 18px;
     cursor: pointer;
-    color: #0989ff;
+    color: white !important;
+}
+.main_header .link:hover
+{
+    padding-bottom: 10px;
+    border-bottom: 3px #7c7978 solid;
 }
 .header
 {
@@ -102,22 +98,22 @@
     max-width: 100%;
     justify-content: space-between;
 }
-.header .container .nav ul
+.main_header .container .nav ul
 {
     display: flex;
 }
-.header .container .nav ul li
+.main_header .container .nav ul li
 {
     margin-left: 20px;
     list-style: none;
 }
-.header .container .nav ul li .link
+.main_header .container .nav ul li .link
 {
     text-decoration: none;
     color: #010f1c;
     transition: 0.5s;
 }
-.header .container .nav ul li .link:hover
+.main_header .container .nav ul li .link:hover
 {
     color: #0989ff;
 }

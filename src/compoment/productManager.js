@@ -9,6 +9,7 @@ import BtnEditProduct from "./btnEditProduct";
 
 const ProductManager = () => {
     const [listProduct, setListProduct] = useState([]);
+    const [keysearch, setKetSearch] = useState("");
     const [page, setPage] = useState(1);
     const [form] = Form.useForm();
     const productapi = () => {
@@ -23,7 +24,16 @@ const ProductManager = () => {
     useEffect(() => {
         productapi();
     }, [])
-
+    const handleSubmitSearch = (e)=>{
+        axios.get(`http://127.0.0.1:8000/api/products/search?keyword=${keysearch}`)
+            .then(res=>{
+                const persons = res.data.products;
+                console.log(persons);
+                setListProduct(persons);
+            })
+            .catch(error => console.log(error))
+        
+    }
     const columns = [
         {
             title: 'STT',
@@ -99,12 +109,13 @@ const ProductManager = () => {
                 form={form}
                 layout="vertical"
                 className="form-group px-2 pt-2 pb-0 mb-0"
+                onFinish={handleSubmitSearch}
             >
                 <Row gutter={[16, 0]}>
                     <Col xl={6} lg={6} md={8} sm={12} xs={24}>
                         <Typography.Title level={5}>Từ khóa tìm kiếm</Typography.Title>
                         <Form.Item name="keysearch">
-                            <Input size="large" placeholder="Nhập từ khóa tìm kiếm" />
+                            <Input size="large" placeholder="Nhập từ khóa tìm kiếm" value={keysearch} onChange={(e)=> setKetSearch(e.target.value)}/>
                         </Form.Item>
                     </Col>
                 </Row>
@@ -116,7 +127,7 @@ const ProductManager = () => {
                         className=" card-user__btn-function d-flex justify-content-between align-items-center"
                     >
                         <Button
-                            type="primary" size="large"
+                            type="primary" size="large" onClick={handleSubmitSearch}
                         ><SearchOutlined />Tìm kiếm</Button>
                         <BtnAddProduct productapi={productapi} />
                     </Col>
