@@ -75,13 +75,13 @@ const Product = ({ detail, view, close, setClose, addtocart }) => {
                     </div> : null
             }
             <div className='products'>
-                <h2><AppstoreOutlined /> Products</h2>
+                <h2><AppstoreOutlined /> Sản phẩm</h2>
                 <div className='container'>
                     <div className='filter'>
                         <div className='categories'>
                             <h3>Danh mục</h3>
                             <ul>
-                                <li onClick={() => AllProducts()}>All Products</li>
+                                <li onClick={() => AllProducts()}>Tất cả sản phẩm</li>
                                 <li onClick={() => filtterproduct(1)}>Màn hình</li>
                                 <li onClick={() => filtterproduct(2)}>Điện thoại</li>
                                 <li onClick={() => filtterproduct(3)}>Chuột Gaming</li>

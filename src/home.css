@@ -40,8 +40,9 @@
 }
 .top_banner .container .detail .link:hover
 {
-    background: #0989ff;
-    color: #fff;
+    background: #423f3e;
+    color: #bbb4aa;
+    border: #bbb4aa solid 1px;
 }
 .product_type
 {
