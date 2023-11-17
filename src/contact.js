@@ -44,7 +44,7 @@ const Contact = () => {
     <>
     <div className='contact_container'>
         <div className='contant'>
-            <h2><ContactsOutlined /> contact us</h2>
+            <h2><ContactsOutlined /> Liên hệ với chúng tôi</h2>
             <div className='form'>
                 <form method='POST'>
                     <input type='text' name='Name' value={users.Name} placeholder='Enter Your Full Name' required autoComplete='off' onChange={data}></input>

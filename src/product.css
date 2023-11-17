@@ -10,6 +10,7 @@
     padding: 30px 40px;
     width: 100%;
     background: #423f3e;
+    border-bottom: #9a9a9a solid 1px;
 }
 .products h2
 {
@@ -56,6 +57,10 @@
     margin-top: 20px;
     color: white;
     cursor: pointer;
+}
+.products .container .filter .categories ul li:hover{
+    padding-bottom: 10px;
+    border-bottom: 3px #7c7978 solid;
 }
 .products .container .productbox
 {
