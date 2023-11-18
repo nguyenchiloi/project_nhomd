@@ -69,7 +69,7 @@ const ProductManager = () => {
             width: 500
         },
         {
-            title: 'Thể loại',
+            title: 'Danh mục',
             key: 'category',
             dataIndex: 'category',
             render: (_, record) => (

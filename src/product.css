@@ -59,7 +59,7 @@
     cursor: pointer;
 }
 .products .container .filter .categories ul li:hover{
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     border-bottom: 3px #7c7978 solid;
 }
 .products .container .productbox
