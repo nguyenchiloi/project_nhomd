@@ -93,7 +93,7 @@ const BtnAddProduct = ({ productapi }) => {
     return (
         <>
             {contextHolder}
-            <Button type="primary" icon={<PlusCircleOutlined />} onClick={showModal} size="large">Thêm</Button>
+            <Button type="primary" icon={<PlusCircleOutlined />} onClick={showModal} size="large" style={{background: "green", marginLeft: 20}}>Thêm</Button>
             <Modal
                 title="Thêm sản phẩm"
                 open={isModalVisible}
@@ -149,7 +149,7 @@ const BtnAddProduct = ({ productapi }) => {
                         <Col xl={24} lg={24} md={24} sm={24} xs={24}>
                             <Form.Item
                                 name="category_id"
-                                label="Thể loại"
+                                label="Danh mục"
                                 rules={[{ required: true, message: 'vui lòng chọn thể loại' }]}
                             >
                                 <Select
