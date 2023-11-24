@@ -82,11 +82,13 @@ const Product = ({ detail, view, close, setClose, addtocart }) => {
                             <h3>Danh mục</h3>
                             <ul>
                                 <li onClick={() => AllProducts()}>Tất cả sản phẩm</li>
-                                <li onClick={() => filtterproduct(1)}>Màn hình</li>
-                                <li onClick={() => filtterproduct(2)}>Điện thoại</li>
-                                <li onClick={() => filtterproduct(3)}>Chuột Gaming</li>
-                                <li onClick={() => filtterproduct(4)}>Tai nghe</li>
-                                <li onClick={() => filtterproduct(5)}>Bàn phím</li>
+                                {listCategory.map((value) => {
+                                    return (
+                                        <>
+                                            <li onClick={() => filtterproduct(value.id)}>{value.name}</li>
+                                        </>
+                                    )
+                                })}
                             </ul>
                         </div>
                     </div>

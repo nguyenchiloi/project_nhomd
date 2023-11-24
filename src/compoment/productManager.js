@@ -20,7 +20,6 @@ const ProductManager = () => {
             })
             .catch(error => console.log(error));
     }
-
     useEffect(() => {
         productapi();
     }, [])
@@ -98,6 +97,7 @@ const ProductManager = () => {
                     <BtnDeleteProduct id={record.id} productapi={productapi} />
                 </Space>
             ),
+            align: 'center',
         },
     ];
     const data = listProduct;
@@ -128,7 +128,7 @@ const ProductManager = () => {
                         <Button
                             type="primary" size="large" onClick={handleSubmitSearch}
                         ><SearchOutlined />Tìm kiếm</Button>
-                        <BtnAddProduct productapi={productapi} />
+                        <BtnAddProduct productapi={productapi}/>
                     </Col>
                 </Row>
             </Form>

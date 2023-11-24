@@ -16,6 +16,7 @@ const BtnAddProduct = ({ productapi }) => {
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
+    const [listCategory, setListCategory] = useState([]);
     const [fileList, setFileList] = useState([]);
     const [form] = Form.useForm();
     const [name, setNameProduct] = useState("");
@@ -23,6 +24,7 @@ const BtnAddProduct = ({ productapi }) => {
     const [description, setDescription] = useState("");
     const [category_id, setCategory_id] = useState("");
     const [messageApi, contextHolder] = message.useMessage();
+    const [selectedOption, setSelectedOption] = useState(null);
     const photo = fileList[0]?.originFileObj.name;
     const success = () => {
         messageApi.open({
@@ -36,6 +38,24 @@ const BtnAddProduct = ({ productapi }) => {
             content: message ? message : 'Thêm sản phẩm thất bại',
         });
     };
+    const categoryapi = () => {
+        axios.get(`http://127.0.0.1:8000/api/categories`)
+            .then(res => {
+                const persons = res.data;
+                setListCategory(persons.map((item, index) => {
+                    return {
+                        key: index,
+                        label: item.name,
+                        value: item.id,
+                    }}));
+            })
+            .catch(error => console.log(error));
+    }
+
+    useEffect(() => {
+        categoryapi();
+    }, [])
+    
     const handlesubmit = async (e) => {
         // e.preventDefault();
         let regobj = { name, description, money, photo, category_id };
@@ -88,12 +108,13 @@ const BtnAddProduct = ({ productapi }) => {
         </div>
     );
     const handleChangeCategory = (value) => {
+        console.log(value);
         setCategory_id(value);
     };
     return (
         <>
             {contextHolder}
-            <Button type="primary" icon={<PlusCircleOutlined />} onClick={showModal} size="large" style={{background: "green", marginLeft: 20}}>Thêm</Button>
+            <Button type="primary" icon={<PlusCircleOutlined />} onClick={showModal} size="large" style={{ background: "green", marginLeft: 20 }}>Thêm</Button>
             <Modal
                 title="Thêm sản phẩm"
                 open={isModalVisible}
@@ -155,13 +176,7 @@ const BtnAddProduct = ({ productapi }) => {
                                 <Select
                                     style={{ width: 470 }}
                                     onChange={handleChangeCategory}
-                                    options={[
-                                        { value: 1, label: 'Màn hình' },
-                                        { value: 2, label: 'Điện thoại' },
-                                        { value: 3, label: 'Chuột Gaming' },
-                                        { value: 4, label: 'Tai nghe' },
-                                        { value: 5, label: 'Bàn phím' },
-                                    ]}
+                                    options={listCategory}
                                 />
                             </Form.Item>
                         </Col>
