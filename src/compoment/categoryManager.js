@@ -1,106 +1,75 @@
 import { React, useEffect, useState } from "react";
 import { Button, Col, Form, Image, Input, Row, Space, Table, Typography } from 'antd';
 import axios from "axios";
-import Paragraph from "antd/es/typography/Paragraph";
-import BtnAddProduct from "./btnAddProduct";
-import BtnDeleteProduct from "./btnDeleteProduct";
-import {SearchOutlined } from "@ant-design/icons";
-import BtnEditProduct from "./btnEditProduct";
+import moment from "moment/moment";
+import BtnAddCategory from "./btnAddCategory";
+import BtnEditCategory from "./btnEditCategory";
+import BtnDeleteCategory from "./btnDeleteCategory";
 
 const CategoryManager = () => {
-    const [listProduct, setListProduct] = useState([]);
-    const [keysearch, setKetSearch] = useState("");
+    const [listCategory, setListCategory] = useState([]);
     const [page, setPage] = useState(1);
     const [form] = Form.useForm();
-    const productapi = () => {
-        axios.get(`http://127.0.0.1:8000/api/products`)
+    const categoryapi = () => {
+        axios.get(`http://127.0.0.1:8000/api/categories`)
             .then(res => {
                 const persons = res.data;
-                setListProduct(persons);
+                setListCategory(persons);
             })
             .catch(error => console.log(error));
     }
 
     useEffect(() => {
-        productapi();
+        categoryapi();
     }, [])
-    const handleSubmitSearch = (e)=>{
-        axios.get(`http://127.0.0.1:8000/api/products/search?keyword=${keysearch}`)
-            .then(res=>{
-                const persons = res.data.data;
-                setListProduct(persons);
-            })
-            .catch(error => console.log(error))
-        
-    }
+
     const columns = [
         {
             title: 'STT',
             dataIndex: 'id',
             key: 'id',
-            render: (_, _record, index) => (page * 5 - 5 + index + 1)
+            render: (_, _record, index) => (page * 5 - 5 + index + 1),
+            align: 'center',
         },
         {
-            title: 'Tên sản phẩm',
+            title: 'Tên danh mục',
             dataIndex: 'name',
             key: 'name',
-
+            align: 'center',
         },
         {
-            title: 'Giá bán',
-            dataIndex: 'money',
-            key: 'money',
-            render: (_, record) => (
-                <>{_} $</>
-            ),
-            width: 150
-        },
-        {
-            title: 'Mô tả',
-            dataIndex: 'description',
-            key: 'description',
-            render: (_, record) => (
-                <>
-                    <Paragraph ellipsis={{ rows: 2, expandable: true, symbol: 'Xem thêm' }}>
-                        {_}
-                    </Paragraph>
-                </>
-            ),
-            width: 500
-        },
-        {
-            title: 'Danh mục',
-            key: 'category',
-            dataIndex: 'category',
-            render: (_, record) => (
-                <>{_.name}</>
-            ),
-            width: 150
-        },
-        {
-            title: 'Hình',
-            key: 'photo',
-            dataIndex: 'photo',
-            render: (_, record) => (
-                <><Image
-                    width={100}
-                    height={100}
-                    src={`./img/${_}`}
-                /></>
-            ),
-        },
+            title: 'Ngày tạo',
+            dataIndex: 'created_at',
+            key: 'created_at',
+            render: (_,index) => {
+                const date = moment(_);
+                return date.format('DD/MM/yyyy');
+            },
+            align: 'center',
+          },
+          {
+            title: 'Ngày cập nhật',
+            dataIndex: 'updated_at',
+            key: 'updated_at',
+            render: (_,index) => {
+                const date = moment(_);
+                return date.format('DD/MM/yyyy');
+            },
+            align: 'center',
+          },
         {
             title: 'Action',
             key: 'action',
             render: (_, record) => (
                 <Space direction="vertical" size="middle">
-                    <BtnEditProduct _={_} id={record.id} productapi={productapi}/>
-                    <BtnDeleteProduct id={record.id} productapi={productapi} />
+                    <BtnEditCategory _={_} id={record.id} categoryapi={categoryapi}/>
+                    <BtnDeleteCategory id={record.id} categoryapi={categoryapi} />
                 </Space>
             ),
+            align: 'center',
         },
     ];
-    const data = listProduct;
+    const data = listCategory;
 
     return (
         <>
@@ -108,16 +77,8 @@ const CategoryManager = () => {
                 form={form}
                 layout="vertical"
                 className="form-group px-2 pt-2 pb-0 mb-0"
-                onFinish={handleSubmitSearch}
             >
-                <Row gutter={[16, 0]}>
-                    <Col xl={6} lg={6} md={8} sm={12} xs={24}>
-                        <Typography.Title level={5}>Từ khóa tìm kiếm</Typography.Title>
-                        <Form.Item name="keysearch">
-                            <Input size="large" placeholder="Nhập từ khóa tìm kiếm" value={keysearch} onChange={(e)=> setKetSearch(e.target.value)}/>
-                        </Form.Item>
-                    </Col>
-                </Row>
+                
 
                 <Row className="pt-0 pb-2">
                     <Col
@@ -125,10 +86,8 @@ const CategoryManager = () => {
                         style={{ justifyContent: 'end', columnGap: 10 }}
                         className=" card-user__btn-function d-flex justify-content-between align-items-center"
                     >
-                        <Button
-                            type="primary" size="large" onClick={handleSubmitSearch}
-                        ><SearchOutlined />Tìm kiếm</Button>
-                        <BtnAddProduct productapi={productapi} />
+                       
+                        <BtnAddCategory categoryapi={categoryapi} />
                     </Col>
                 </Row>
             </Form>

@@ -4,7 +4,9 @@ import { BsBagCheck } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
 import './nav.css'
 import { LoginOutlined, LogoutOutlined } from '@ant-design/icons';
-import { Button, Col, Input, Row } from 'antd';
+import { Button, Col, Input, Row, Dropdown, Space } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+
 const Nav = ({ isAuthen, setIsAuthen, searchbtn }) => {
     const [search, setSearch] = useState();
     const usenavigate = useNavigate();
@@ -13,6 +15,20 @@ const Nav = ({ isAuthen, setIsAuthen, searchbtn }) => {
         setToken(localStorage.getItem('token'))
     })
     let nameUser = localStorage.getItem('name');
+    const items = [
+        {
+            label: <Link to={'/userdetail'}>Thông tin người dùng</Link>,
+            key: '0',
+        },
+        {
+            label: <a href="https://www.aliyun.com">Thay đổi mật khẩu</a>,
+            key: '1',
+        },
+        {
+            label: 'Xem chi tiết đơn hàng',
+            key: '3',
+        },
+    ];
     return (
         <>
             <div className='free'>
@@ -22,7 +38,7 @@ const Nav = ({ isAuthen, setIsAuthen, searchbtn }) => {
             </div>
             <div className='main_header'>
                 <Row>
-                    <Col md={8} style={{padding: 10}}>
+                    <Col md={8} style={{ padding: 10 }}>
                         <Row>
                             <Col md={5} style={{ textAlign: 'center' }}><Link to='/' className='link'>Trang chủ</Link></Col>
                             <Col md={5} style={{ textAlign: 'center' }}><Link to='/product' className='link'>Sản phẩm</Link></Col>
@@ -35,8 +51,8 @@ const Nav = ({ isAuthen, setIsAuthen, searchbtn }) => {
                             <Col md={18}>
                                 <Input size='large' value={search} placeholder='Nhập tên sản phẩm cần tìm kiếm ...' autoComplete='off' onChange={(e) => setSearch(e.target.value)} />
                             </Col>
-                            <Col style={{marginLeft: 10}}>
-                                <Button size='large' type="primary" onClick={() => searchbtn(search)} style={{background: "#68635c"}}>Search</Button>
+                            <Col style={{ marginLeft: 10 }}>
+                                <Button size='large' type="primary" onClick={() => searchbtn(search)} style={{ background: "#68635c" }}>Tìm kiếm</Button>
                             </Col>
                         </Row>
                     </Col>
@@ -47,12 +63,19 @@ const Nav = ({ isAuthen, setIsAuthen, searchbtn }) => {
                                     {
                                         nameUser ?
                                             (
-                                                <div className='account'>
-                                                    <div className='user_icon'>
-                                                        <AiOutlineUser />
+                                                <Dropdown
+                                                    menu={{
+                                                        items,
+                                                    }}
+                                                    trigger={['click']}
+                                                >
+                                                    <div className='account'>
+                                                        <div className='user_icon'>
+                                                            <AiOutlineUser />
+                                                        </div>
+                                                        <p>Hello, {nameUser}</p>
                                                     </div>
-                                                    <p>Hello, {nameUser}</p>
-                                                </div>
+                                                </Dropdown>
                                             ) : ''
                                     }
                                 </Col>
@@ -71,7 +94,7 @@ const Nav = ({ isAuthen, setIsAuthen, searchbtn }) => {
                     <Col md={2}>
                         {
                             token ?
-                                <button onClick={() => { localStorage.removeItem('name'); localStorage.removeItem('type'); localStorage.removeItem('token'); usenavigate('/'); setToken(false); setIsAuthen(false) }} style={{border: 'none' , background: '#101010'}}><LogoutOutlined style={{ fontSize: 30, color: 'white' }} /> </button>
+                                <button onClick={() => { localStorage.removeItem('name'); localStorage.removeItem('type'); localStorage.removeItem('token'); usenavigate('/'); setToken(false); setIsAuthen(false) }} style={{ border: 'none', background: '#101010' }}><LogoutOutlined style={{ fontSize: 30, color: 'white' }} /> </button>
                                 :
                                 <Link to='/login'><span><LoginOutlined style={{ fontSize: 30, color: "white" }} /></span></Link>
                         }

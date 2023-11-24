@@ -10,9 +10,10 @@ import {
 } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
 import ProductManager from './productManager';
+import CategoryManager from './categoryManager';
 import axios from 'axios';
+import UserManager from './userManager';
 const { Header, Sider, Content } = Layout;
 const Managers = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -91,7 +92,7 @@ const Managers = () => {
             {content === 1 ?
               <ProductManager />
               : content === 2 ?
-                content : ''}
+                <CategoryManager /> : content === 3 ? <UserManager />: ''}
           </Content>
         </Layout>
       </Layout>

@@ -2,12 +2,12 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Popover, Space, message } from "antd";
 
 
-const BtnDeleteProduct = ({ id, productapi }) => {
+const BtnDeleteCategory = ({ id, categoryapi }) => {
     const [messageApi, contextHolder] = message.useMessage();
     const success = (message) => {
         messageApi.open({
             type: 'success',
-            content: message ? message :'Xóa sản phẩm thành công',
+            content: message ? message : 'Xóa sản phẩm thành công',
         });
     };
     const error = (message) => {
@@ -17,13 +17,13 @@ const BtnDeleteProduct = ({ id, productapi }) => {
         });
     };
     const onsubmitDelete = () => {
-        fetch(`http://127.0.0.1:8000/api/admin/products/delete/${id}`, {
+        fetch(`http://127.0.0.1:8000/api/admin/categories/delete/${id}`, {
             method: "POST",
             headers: { 'content-Type': 'application/json' },
         }).then(res => res.json()).then(data => {
             if (data.success) {
                 success();
-                productapi();
+                categoryapi();
             } else {
                 error(data.message);
             }
@@ -37,7 +37,7 @@ const BtnDeleteProduct = ({ id, productapi }) => {
             <Popover
                 content={
                     <div>
-                        Chọn xác nhận để xoá sản phẩm này!
+                        Chọn xác nhận để xoá danh mục này!
                         <Space className="d-flex justify-content-flex-end mt-1">
                             <Button style={{ marginTop: 20 }} type="primary" onClick={onsubmitDelete}>Xác nhận</Button>
                         </Space>
@@ -53,4 +53,4 @@ const BtnDeleteProduct = ({ id, productapi }) => {
         </>
     );
 }
-export default BtnDeleteProduct;
+export default BtnDeleteCategory;

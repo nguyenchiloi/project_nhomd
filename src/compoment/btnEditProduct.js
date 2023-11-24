@@ -11,7 +11,7 @@ const getBase64 = (file) =>
         reader.onerror = (error) => reject(error);
     });
 
-const BtnEditProduct = ({ _ ,id,productapi}) => {
+const BtnEditProduct = ({ _ ,id,productapi }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
@@ -23,6 +23,7 @@ const BtnEditProduct = ({ _ ,id,productapi}) => {
     const [description, setDescription] = useState(_.description);
     const [category_id, setCategory_id] = useState(_.category_id);
     const [messageApi, contextHolder] = message.useMessage();
+    const [listCategory, setListCategory] = useState([]);
     const [photo, setPhoto] = useState("");
     useEffect(() => {
         if (fileList.length > 0) {
@@ -54,6 +55,23 @@ const BtnEditProduct = ({ _ ,id,productapi}) => {
             });
         }
     }, [_]);
+    const categoryapi = () => {
+        axios.get(`http://127.0.0.1:8000/api/categories`)
+            .then(res => {
+                const persons = res.data;
+                setListCategory(persons.map((item, index) => {
+                    return {
+                        key: index,
+                        label: item.name,
+                        value: item.id,
+                    }}));
+            })
+            .catch(error => console.log(error));
+    }
+
+    useEffect(() => {
+        categoryapi();
+    }, [])
     const handlesubmit = async (e) => {
         let regobj = { name, description, money, photo, category_id };
         const response = await fetch(`http://127.0.0.1:8000/api/admin/products/update/${id}`, {
@@ -167,18 +185,12 @@ const BtnEditProduct = ({ _ ,id,productapi}) => {
                             <Form.Item
                                 name="category_id"
                                 label="Danh mục"
-                                rules={[{ required: true, message: 'vui lòng chọn thể loại' }]}
+                                rules={[{ required: true, message: 'vui lòng chọn danh mục' }]}
                             >
                                 <Select
                                     style={{ width: 470 }}
                                     onChange={handleChangeCategory}
-                                    options={[
-                                        { value: 1, label: 'Màn hình' },
-                                        { value: 2, label: 'Điện thoại' },
-                                        { value: 3, label: 'Chuột Gaming' },
-                                        { value: 4, label: 'Tai nghe' },
-                                        { value: 5, label: 'Bàn phím' },
-                                    ]}
+                                    options={listCategory}
                                 />
                             </Form.Item>
                         </Col>
