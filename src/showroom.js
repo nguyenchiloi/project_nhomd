@@ -72,9 +72,9 @@ const showroom = () => {
                     </Row>
                     <Row className="sr-space" justify='center' gutter={[16, 16]}>
                         <Col style={{ textAlign: 'left', paddingLeft: 30 }} span={8} offset={4}>
-                            <div className="srName">Chi nhánh Bình Dương</div>
+                            <div className="srName">Chi nhánh Bến Cát</div>
                             <h4>Thời gian làm việc: 8:00 - 21:00 | Thứ 2 - Chủ Nhật</h4>
-                            <div className="address">Địa chỉ: Bình Dương, TP.Thủ Đức, TP.HCM </div>
+                            <div className="address">Địa chỉ: 13 phường Mỹ Phước, Bến Cát, Bình Dương </div>
                         </Col>
                         <Col span={12}>
                             <div>
