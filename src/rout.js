@@ -11,6 +11,9 @@ import ProductManager from './compoment/productManager'
 import Managers from './compoment/managers'
 import About from './about'
 import UserDetail from './userDetail'
+import Showroom from './showroom'
+import Guarantee from './guarantee'
+import News from './news'
 const Rout = ({setIsAuthen,product, setProduct, detail, view, close, setClose, cart, setCart, addtocart}) => {
   return (
     <>
@@ -26,6 +29,9 @@ const Rout = ({setIsAuthen,product, setProduct, detail, view, close, setClose, c
         <Route path='/productManager' element={<ProductManager />} />
         <Route path='/managers' element={<Managers />} />
         <Route path='/userdetail' element={<UserDetail/>}/>
+        <Route path='/showroom' element={<Showroom/>}/>
+        <Route path='/guarantee' element={<Guarantee/>}/>
+        <Route path='/news' element={<News/>}/>
     </Routes>
     </>
   )

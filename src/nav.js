@@ -7,7 +7,7 @@ import { LoginOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Button, Col, Input, Row, Dropdown, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 
-const Nav = ({ isAuthen, setIsAuthen, searchbtn }) => {
+const Nav = ({ isAuthen, setIsAuthen }) => {
     const [search, setSearch] = useState();
     const usenavigate = useNavigate();
     const [token, setToken] = useState();
@@ -38,25 +38,18 @@ const Nav = ({ isAuthen, setIsAuthen, searchbtn }) => {
             </div>
             <div className='main_header'>
                 <Row>
-                    <Col md={8} style={{ padding: 10 }}>
+                    <Col md={18} style={{ padding: 5 }}>
                         <Row>
-                            <Col md={5} style={{ textAlign: 'center' }}><Link to='/' className='link'>Trang chủ</Link></Col>
-                            <Col md={5} style={{ textAlign: 'center' }}><Link to='/product' className='link'>Sản phẩm</Link></Col>
-                            <Col md={5} style={{ textAlign: 'center' }}><Link to='/about' className='link'>Về chúng tôi</Link></Col>
-                            <Col md={5} style={{ textAlign: 'center' }}><Link to='/contact' className='link'>Liên hệ</Link></Col>
+                            <Col md={3} style={{ textAlign: 'center' }}><Link to='/' className='link'>Trang chủ</Link></Col>
+                            <Col md={3} style={{ textAlign: 'center' }}><Link to='/product' className='link'>Sản phẩm</Link></Col>
+                            <Col md={3} style={{ textAlign: 'center' }}><Link to='/showroom' className='link'>Showroom</Link></Col>
+                            <Col md={3} style={{ textAlign: 'center' }}><Link to='/guarantee' className='link'>Bảo hành</Link></Col>
+                            <Col md={3} style={{ textAlign: 'center' }}><Link to='/news' className='link'>Tin tức</Link></Col>
+                            <Col md={3} style={{ textAlign: 'center' }}><Link to='/about' className='link'>Về chúng tôi</Link></Col>
+                            <Col md={3} style={{ textAlign: 'center' }}><Link to='/contact' className='link'>Liên hệ</Link></Col>
                         </Row>
                     </Col>
-                    <Col md={8}>
-                        <Row>
-                            <Col md={18}>
-                                <Input size='large' value={search} placeholder='Nhập tên sản phẩm cần tìm kiếm ...' autoComplete='off' onChange={(e) => setSearch(e.target.value)} />
-                            </Col>
-                            <Col style={{ marginLeft: 10 }}>
-                                <Button size='large' type="primary" onClick={() => searchbtn(search)} style={{ background: "#68635c" }}>Tìm kiếm</Button>
-                            </Col>
-                        </Row>
-                    </Col>
-                    <Col md={6}>
+                    <Col md={4}>
                         <div className='icon'>
                             <Row>
                                 <Col md={12}>

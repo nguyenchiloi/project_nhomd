@@ -16,13 +16,7 @@ const App = () => {
   const [detail, setDetail] = useState([])
   //filter product
   const [product, setProduct] = useState([])
-  const searchbtn = (productname) => {
-    const change = product.filter((x) => {
-      return x.name === productname
-    })
-    setProduct(change)
-  }
-  //product detail
+   //product detail
   const view = (product) => {
     setDetail([{ ...product }])
     setClose(true)
@@ -43,7 +37,7 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <Nav isAuthen={isAuthen} setIsAuthen={setIsAuthen} searchbtn={searchbtn} />
+        <Nav isAuthen={isAuthen} setIsAuthen={setIsAuthen} />
         <>
           <Rout setIsAuthen={setIsAuthen} product={product} setProduct={setProduct} detail={detail} view={view} close={close} setClose={setClose} cart={cart} setCart={setCart} addtocart={addtocart} />
           <Footer />
