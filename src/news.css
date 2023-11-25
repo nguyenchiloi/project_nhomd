@@ -1,0 +1,50 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+.fire{
+    font-size: xx-large;
+    border-bottom: white solid 1px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+.bor{
+    border: white solid 3px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.bo{    
+    width: 50%;
+    margin-bottom: 20px;
+    text-align: left;
+}
+.newsName{
+    font-size: 20px;
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+.newsdes{
+    margin-bottom: 20px;
+    border-bottom: white solid 1px;
+    width: 90%;
+    margin-left: 40px;
+    padding-bottom: 20px;
+}
+.newName{
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+.newsbody{
+    font-size: 15px;
+}
+.bornew{
+    border: white solid 1px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.date{
+    margin-top: 30px;
+}
