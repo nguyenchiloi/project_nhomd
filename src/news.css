@@ -1,0 +1,17 @@
+.content{
+    padding: 30px 40px;
+    width: 100%;
+    background: #423f3e;
+    border-bottom: #9a9a9a solid 1px;
+}
+.content h2{
+    font-size: 42px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 300;
+    color: #bbb4aa;
+}
+.contentnews{
+    border: 1px solid gray;
+    border-radius: 10px;
+}

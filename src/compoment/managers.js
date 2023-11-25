@@ -6,7 +6,8 @@ import {
   UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
-  UnorderedListOutlined
+  UnorderedListOutlined,
+  BankOutlined
 } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
@@ -14,6 +15,7 @@ import ProductManager from './productManager';
 import CategoryManager from './categoryManager';
 import axios from 'axios';
 import UserManager from './userManager';
+import ShowroomManager from './showroomManager';
 const { Header, Sider, Content } = Layout;
 const Managers = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -60,6 +62,12 @@ const Managers = () => {
                 label: 'Quản lý user',
                 onClick: () => setContent(3),
               },
+              {
+                key: '4',
+                icon: <BankOutlined />,
+                label: 'Quản lý showroom',
+                onClick: () => setContent(4),
+              },
             ]}
           />
         </Sider>
@@ -92,7 +100,11 @@ const Managers = () => {
             {content === 1 ?
               <ProductManager />
               : content === 2 ?
-                <CategoryManager /> : content === 3 ? <UserManager />: ''}
+                <CategoryManager />
+                : content === 3 ?
+                  <UserManager />
+                  : content === 4 ?
+                    <ShowroomManager /> : ''}
           </Content>
         </Layout>
       </Layout>
