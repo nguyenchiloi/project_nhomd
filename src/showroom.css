@@ -1,0 +1,28 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+.srName{
+    font-size: 40px;
+    border-bottom: white solid 3px;
+    padding-bottom: 5px;
+}
+h4{
+    font-size: 20px;
+    padding-top: 5px;
+}
+.address{
+    font-size: 20px;
+    padding-top: 5px;
+    margin-bottom: 20px;
+}
+.pic{
+    border: #bbb4aa solid 5px;
+    border-radius: 3%;
+}
+.sr-space{
+    margin-bottom: 30px;
+}
