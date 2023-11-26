@@ -6,6 +6,7 @@ import './nav.css'
 import { LoginOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Button, Col, Input, Row, Dropdown, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
+import UserDetail from './userDetail';
 
 const Nav = ({ isAuthen, setIsAuthen }) => {
     const [search, setSearch] = useState();
@@ -17,12 +18,12 @@ const Nav = ({ isAuthen, setIsAuthen }) => {
     let nameUser = localStorage.getItem('name');
     const items = [
         {
-            label: <Link to={'/userdetail'}>Thông tin người dùng</Link>,
-            key: '0',
+            label: <Link to={'/userdetail'} key={1}>Thông tin người dùng</Link>,
+            key: '1',
         },
         {
-            label: <a href="https://www.aliyun.com">Thay đổi mật khẩu</a>,
-            key: '1',
+            label: <Link to={'/userdetail'}>Thay đổi mật khẩu</Link>,
+            key: '2',
         },
         {
             label: 'Xem chi tiết đơn hàng',
