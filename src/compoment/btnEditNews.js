@@ -1,4 +1,4 @@
-import { PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { EditOutlined, PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, Modal, Row, Select, Upload, message } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import axios from "axios";
@@ -11,43 +11,57 @@ const getBase64 = (file) =>
         reader.onerror = (error) => reject(error);
     });
 
-const BtnAddShowroom = ({showroomapi}) => {
+const BtnEditNews = ({ _ ,id,newsapi}) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
-    const [time, setTime] = useState("");
+    const [description, setDescription] = useState(_.description);
     const [fileList, setFileList] = useState([]);
     const [form] = Form.useForm();
-    const [name, setNameProduct] = useState("");
-    const [address, setAddress] = useState("");
-    const [map, setMap] = useState("");
+    const [title, setTitleProduct] = useState(_.title);
     const [messageApi, contextHolder] = message.useMessage();
-    const photo = fileList[0]?.originFileObj.name;
+    const [photo, setPhoto] = useState("");
+    useEffect(() => {
+        if (fileList.length > 0) {
+          setPhoto(fileList[0]?.name);
+        } else {
+          setPhoto(_.photo)
+        }
+      }, [fileList, _.photo]);
     const success = () => {
         messageApi.open({
             type: 'success',
-            content: 'Thêm cửa hàng thành công',
+            content: 'Sửa tin tức thành công',
         });
     };
     const error = (message) => {
         messageApi.open({
             type: 'error',
-            content: message ? message : 'Thêm cửa hàng thất bại',
+            content: message ? message : 'Sửa tin tức thất bại',
         });
     };
-    const handlesubmit = (e) => {
-        fetch('http://127.0.0.1:8000/api/admin/showroom/create', {
+    useEffect(() => {
+        if (_) {
+            form.setFieldsValue({
+                title: _.title,
+                description: _.description,
+                photo: _.photo
+            });
+        }
+    }, [_]);
+    const handlesubmit = async (e) => {
+            await fetch(`http://127.0.0.1:8000/api/admin/new/update/${id}`, {
             method: "POST",
             headers: { 'content-Type': 'application/json' },
-            body: JSON.stringify({ name, address, time, photo, map })
+            body: JSON.stringify({ title, description, photo })
         }).then(res => res.json()).then(data => {
             if (data.success) {
                 success();
                 setIsModalVisible(false);
                 form.resetFields();
-                showroomapi();
-                setFileList([])
+                setFileList([]);
+                newsapi();
             } else {
                 error(data.message);
             }
@@ -88,9 +102,9 @@ const BtnAddShowroom = ({showroomapi}) => {
     return (
         <>
             {contextHolder}
-            <Button type="primary" icon={<PlusCircleOutlined />} onClick={showModal} size="large" style={{ background: "green", marginLeft: 20 }}>Thêm</Button>
+            <Button size="large" type="primary" style={{ backgroundColor: "#ff9c00" }} icon={<EditOutlined />} onClick={showModal}>Sửa</Button>
             <Modal
-                title="Thêm cửa hàng"
+                title="Sửa tin tức"
                 open={isModalVisible}
                 maskClosable={false}
                 onCancel={handleCancel}
@@ -100,38 +114,20 @@ const BtnAddShowroom = ({showroomapi}) => {
                     <Row className="d-flex" justify="start" gutter={[0, 15]}>
                         <Col xl={24} lg={24} md={24} sm={24} xs={24}>
                             <Form.Item
-                                name="name"
-                                label="Tên cửa hàng:"
-                                rules={[{ required: true, message: 'vui lòng nhập tên cửa hàng' }]}
+                                name="title"
+                                label="Tiêu đề:"
+                                rules={[{ required: true, message: 'vui lòng nhập tên tin tức' }]}
                             >
-                                <Input placeholder="Nhập tên cửa hàng" name="name" onChange={e => setNameProduct(e.target.value)} />
+                                <Input placeholder="Nhập tiêu đề" name="title" onChange={e => setTitleProduct(e.target.value)} />
                             </Form.Item>
                         </Col>
                         <Col xl={24} lg={24} md={24} sm={24} xs={24}>
                             <Form.Item
-                                name="address"
-                                label="Địa chỉ"
-                                rules={[{ required: true, message: 'vui lòng nhập địa chỉ' }]}
+                                name="description"
+                                label="Mô tả"
+                                rules={[{ required: true, message: 'vui lòng nhập mô tả' }]}
                             >
-                                <Input placeholder="Nhập địa chỉ" name="address" onChange={e => setAddress(e.target.value)}></Input>
-                            </Form.Item>
-                        </Col>
-                        <Col xl={24} lg={24} md={24} sm={24} xs={24}>
-                            <Form.Item
-                                name="time"
-                                label="Thời gian làm việc"
-                                rules={[{ required: true, message: 'vui lòng nhập thời gian làm việc' }]}
-                            >
-                                <Input placeholder="Nhập thời gian làm việc" name="time" onChange={e => setTime(e.target.value)}></Input>
-                            </Form.Item>
-                        </Col>
-                        <Col xl={24} lg={24} md={24} sm={24} xs={24}>
-                            <Form.Item
-                                name="map"
-                                label="Map"
-                                rules={[{ required: true, message: 'vui lòng nhập map' }]}
-                            >
-                                <TextArea placeholder="Nhập map" name="map" onChange={e => setMap(e.target.value)}></TextArea>
+                                <TextArea placeholder="Nhập mô tả" name="description" onChange={e => setDescription(e.target.value)}/>
                             </Form.Item>
                         </Col>
                         <Col xl={24} lg={24} md={24} sm={24} xs={24}>
@@ -165,4 +161,4 @@ const BtnAddShowroom = ({showroomapi}) => {
         </>
     )
 }
-export default BtnAddShowroom;
+export default BtnEditNews

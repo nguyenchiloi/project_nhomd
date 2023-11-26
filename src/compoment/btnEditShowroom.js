@@ -1,4 +1,4 @@
-import { PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { EditOutlined, PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, Modal, Row, Select, Upload, message } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import axios from "axios";
@@ -11,33 +11,51 @@ const getBase64 = (file) =>
         reader.onerror = (error) => reject(error);
     });
 
-const BtnAddShowroom = ({showroomapi}) => {
+const BtnEditShowroom = ({ _ ,id,showroomapi}) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
-    const [time, setTime] = useState("");
+    const [time, setTime] = useState(_.time);
     const [fileList, setFileList] = useState([]);
     const [form] = Form.useForm();
-    const [name, setNameProduct] = useState("");
-    const [address, setAddress] = useState("");
-    const [map, setMap] = useState("");
+    const [name, setNameProduct] = useState(_.name);
+    const [address, setAddress] = useState(_.address);
+    const [map, setMap] = useState(_.map);
     const [messageApi, contextHolder] = message.useMessage();
-    const photo = fileList[0]?.originFileObj.name;
+    const [photo, setPhoto] = useState("");
+    useEffect(() => {
+        if (fileList.length > 0) {
+          setPhoto(fileList[0]?.name);
+        } else {
+          setPhoto(_.photo)
+        }
+      }, [fileList, _.photo]);
     const success = () => {
         messageApi.open({
             type: 'success',
-            content: 'Thêm cửa hàng thành công',
+            content: 'Sửa cửa hàng thành công',
         });
     };
     const error = (message) => {
         messageApi.open({
             type: 'error',
-            content: message ? message : 'Thêm cửa hàng thất bại',
+            content: message ? message : 'Sửa cửa hàng thất bại',
         });
     };
-    const handlesubmit = (e) => {
-        fetch('http://127.0.0.1:8000/api/admin/showroom/create', {
+    useEffect(() => {
+        if (_) {
+            form.setFieldsValue({
+                name: _.name,
+                address: _.address,
+                time: _.time,
+                map: _.map,
+                photo: _.photo
+            });
+        }
+    }, [_]);
+    const handlesubmit = async (e) => {
+            await fetch(`http://127.0.0.1:8000/api/admin/showroom/update/${id}`, {
             method: "POST",
             headers: { 'content-Type': 'application/json' },
             body: JSON.stringify({ name, address, time, photo, map })
@@ -46,8 +64,8 @@ const BtnAddShowroom = ({showroomapi}) => {
                 success();
                 setIsModalVisible(false);
                 form.resetFields();
+                setFileList([]);
                 showroomapi();
-                setFileList([])
             } else {
                 error(data.message);
             }
@@ -88,9 +106,9 @@ const BtnAddShowroom = ({showroomapi}) => {
     return (
         <>
             {contextHolder}
-            <Button type="primary" icon={<PlusCircleOutlined />} onClick={showModal} size="large" style={{ background: "green", marginLeft: 20 }}>Thêm</Button>
+            <Button size="large" type="primary" style={{ backgroundColor: "#ff9c00" }} icon={<EditOutlined />} onClick={showModal}>Sửa</Button>
             <Modal
-                title="Thêm cửa hàng"
+                title="Sửa cửa hàng"
                 open={isModalVisible}
                 maskClosable={false}
                 onCancel={handleCancel}
@@ -165,4 +183,4 @@ const BtnAddShowroom = ({showroomapi}) => {
         </>
     )
 }
-export default BtnAddShowroom;
+export default BtnEditShowroom

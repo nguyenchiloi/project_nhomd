@@ -2,24 +2,24 @@ import { React, useEffect, useState } from "react";
 import { Image, Space, Table } from 'antd';
 import axios from "axios";
 import Paragraph from "antd/es/typography/Paragraph";
-import BtnAddShowroom from "./btnAddShowroom";
-import BtnDeleteShowroom from "./btnDeleteShowroom";
-import BtnEditShowroom from "./btnEditShowroom";
+import BtnAddNews from "./btnAddNews";
+import BtnDeleteNews from "./btnDeleteNews";
+import BtnEditNews from "./btnEditNews";
 
-const ShowroomManager = () => {
-    const [listShowroom, setListShowroom] = useState([]);
+const NewsManager = () => {
+    const [listNews, setListNews] = useState([]);
     const [page, setPage] = useState(1);
-    const showroomapi = () => {
-        axios.get(`http://127.0.0.1:8000/api/admin/showroom`)
+    const newsapi = () => {
+        axios.get(`http://127.0.0.1:8000/api/admin/news`)
             .then(res => {
                 const persons = res.data.data;
-                setListShowroom(persons);
+                setListNews(persons);
             })
             .catch(error => console.log(error));
     }
 
     useEffect(() => {
-        showroomapi();
+        newsapi();
     }, [])
 
     const columns = [
@@ -31,16 +31,15 @@ const ShowroomManager = () => {
             align: 'center',
         },
         {
-            title: 'Tên cửa hàng',
-            dataIndex: 'name',
-            key: 'name',
-            align: 'center',
-            width: 200,
+            title: 'Tiêu đề',
+            dataIndex: 'title',
+            key: 'title',
+            width: 250,
         },
         {
-            title: 'Địa chỉ',
-            dataIndex: 'address',
-            key: 'address',
+            title: 'Mô tả',
+            dataIndex: 'description',
+            key: 'description',
             render: (_, record) => (
                 <>
                     <Paragraph ellipsis={{ rows: 2, expandable: true, symbol: 'Xem thêm' }}>
@@ -48,27 +47,6 @@ const ShowroomManager = () => {
                     </Paragraph>
                 </>
             ),
-            width: 500,
-        },
-        {
-            title: 'Thời gian làm việc',
-            dataIndex: 'time',
-            key: 'time',
-            align: 'center',
-        },
-        {
-            title: 'Map',
-            dataIndex: 'map',
-            key: 'map',
-            render: (_, record) => (
-                <>
-                    <Paragraph ellipsis={{ rows: 2, expandable: true, symbol: 'Xem thêm' }}>
-                        {_}
-                    </Paragraph>
-                </>
-            ),
-            align: 'center',
-            width: 200
         },
         {
             title: 'Hình ảnh',
@@ -88,20 +66,20 @@ const ShowroomManager = () => {
             key: 'action',
             render: (_, record) => (
                 <Space direction="vertical" size="middle">
-                    <BtnEditShowroom _={_} id={record.id} showroomapi={showroomapi}/>
-                    <BtnDeleteShowroom id={record.id} showroomapi={showroomapi}/>
+                    <BtnEditNews _={_} id={record.id} newsapi={newsapi}/>
+                    <BtnDeleteNews id={record.id} newsapi={newsapi} />
                 </Space>
             ),
             align: 'center',
         },
     ];
-    const data = listShowroom;
+    const data = listNews;
 
     return (
         <>
-            <BtnAddShowroom showroomapi={showroomapi} />
+            <BtnAddNews newsapi={newsapi} />
             <Table pagination={{ pageSize: 5, current: page, onChange: (e) => setPage(e) }} columns={columns} dataSource={data} style={{ padding: 50 }} />
         </>
     )
 }
-export default ShowroomManager;
+export default NewsManager;

@@ -1,19 +1,13 @@
-import { AppstoreOutlined } from "@ant-design/icons";
-import { Col, Image, Row } from "antd";
-import './news.css';
-
+import { Col, Image, Row } from "antd"
 const News = () => {
     return (
         <>
-            <div className="content">
-                <h2><AppstoreOutlined />Tin tức</h2>
-                <Row className="contentnews">
-                    <Col span={5} offset={6} className="contentframe">
-                        <Image src={`./img/b7.png`} width={350} />
+            <div>
+                <Row justify="center" align="top">
+                    <Col span={8} offset={4}>
                     </Col>
-                    <Col span={8} className="contentmain">
-                        <h2>Tiêu đề</h2>
-                        <div>Mô tả</div>
+                    <Col span={8}>
+                    
                     </Col>
                 </Row>
             </div>
