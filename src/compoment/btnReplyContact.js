@@ -58,7 +58,7 @@ const BtnReplyContact = ({ _ }) => {
     return (
         <>
             {contextHolder}
-            <Button size="large" type="primary" style={{ backgroundColor: "#ff9c00" }} icon={<EditOutlined />} onClick={showModal}>Sửa</Button>
+            <Button size="large" type="primary" style={{ backgroundColor: "#ff9c00" }} icon={<EditOutlined />} onClick={showModal}>Trả lời</Button>
             <Modal
                 title="Thêm danh mục"
                 open={isModalVisible}

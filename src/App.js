@@ -9,37 +9,39 @@ import axios from 'axios';
 const App = () => {
   const [isAuthen, setIsAuthen] = useState(false);
   const type = localStorage.getItem('type');
-  // add to cart
-  const [cart, setCart] = useState([]);
   //product Detail
   const [close, setClose] = useState(false);
   const [detail, setDetail] = useState([])
   //filter product
   const [product, setProduct] = useState([])
-   //product detail
+  //product detail
   const view = (product) => {
     setDetail([{ ...product }])
     setClose(true)
   }
-  // add to cart
-  const addtocart = (product) => {
-    const exsit = cart.find((x) => {
-      return x.id === product.id
+  const [user, setUser] = useState([]);
+  const userapi = () =>{
+    let token = localStorage.getItem('token');
+    axios.get(`http://127.0.0.1:8000/api/user`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     })
-    if (exsit) {
-      alert("This Product is already added to cart")
-    }
-    else {
-      setCart([...cart, { ...product, qty: 1 }])
-      alert("product is added to cart")
-    }
+      .then(res => {
+        const persons = res.data;
+        setUser(persons);
+      })
+      .catch(error => console.log(error));
   }
+  useEffect(() => {
+    userapi();
+  }, []);
   return (
     <>
       <BrowserRouter>
-        <Nav isAuthen={isAuthen} setIsAuthen={setIsAuthen} />
+        <Nav isAuthen={isAuthen} setIsAuthen={setIsAuthen} setUser={setUser}  />
         <>
-          <Rout setIsAuthen={setIsAuthen} product={product} setProduct={setProduct} detail={detail} view={view} close={close} setClose={setClose} cart={cart} setCart={setCart} addtocart={addtocart} />
+          <Rout setIsAuthen={setIsAuthen} product={product} setProduct={setProduct} detail={detail} view={view} close={close} setClose={setClose} user={user} userapi={userapi}/>
           <Footer />
         </>
       </BrowserRouter>

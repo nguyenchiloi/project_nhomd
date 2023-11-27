@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import {
+  LockOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  UnorderedListOutlined,
   UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
@@ -26,19 +28,19 @@ const UserDetail = () => {
             {
               key: '1',
               icon: <UserOutlined />,
-              label: 'nav 1',
+              label: 'Thông tin người dùng',
               onClick: () => setContent(1),
             },
             {
               key: '2',
-              icon: <VideoCameraOutlined />,
-              label: 'nav 2',
+              icon: <LockOutlined />,
+              label: 'Thay đổi mật khẩu',
               onClick: () => setContent(2),
             },
             {
               key: '3',
-              icon: <UploadOutlined />,
-              label: 'nav 3',
+              icon: <UnorderedListOutlined />,
+              label: 'Xem chi tiết đơn hàng',
               onClick: () => setContent(3),
             },
           ]}

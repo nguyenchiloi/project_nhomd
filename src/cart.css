@@ -147,19 +147,14 @@
 .cartcontainer .totalprice
 {
     margin-top: 30px;
-    margin-left: 50%;
+    margin-left: 45%;
     font-size: 22px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    color: white;
 }
 .cartcontainer .checkout
 {
     margin-top: 40px;
-    margin-left: 53%;
-    padding: 10px 20px;
-    color: #fff;
-    border: none;
-    outline: none;
-    background: #0989ff;
-    cursor: pointer;
+    margin-left: 46%;
 }

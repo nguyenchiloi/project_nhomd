@@ -8,7 +8,7 @@ import { Button, Col, Input, Row, Dropdown, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import UserDetail from './userDetail';
 
-const Nav = ({ isAuthen, setIsAuthen }) => {
+const Nav = ({ isAuthen, setIsAuthen,setUser }) => {
     const [search, setSearch] = useState();
     const usenavigate = useNavigate();
     const [token, setToken] = useState();
@@ -22,11 +22,11 @@ const Nav = ({ isAuthen, setIsAuthen }) => {
             key: '1',
         },
         {
-            label: <Link to={'/userdetail'}>Thay đổi mật khẩu</Link>,
+            label: <Link to={'/userdetail'} key={2}>Thay đổi mật khẩu</Link>,
             key: '2',
         },
         {
-            label: 'Xem chi tiết đơn hàng',
+            label: <Link to={'/userdetail'} key={3}>'Xem chi tiết đơn hàng'</Link>,
             key: '3',
         },
     ];
@@ -88,7 +88,7 @@ const Nav = ({ isAuthen, setIsAuthen }) => {
                     <Col md={2}>
                         {
                             token ?
-                                <button onClick={() => { localStorage.removeItem('name'); localStorage.removeItem('type'); localStorage.removeItem('token'); usenavigate('/'); setToken(false); setIsAuthen(false) }} style={{ border: 'none', background: '#101010' }}><LogoutOutlined style={{ fontSize: 30, color: 'white' }} /> </button>
+                                <button onClick={() => { localStorage.removeItem('name'); localStorage.removeItem('type'); localStorage.removeItem('token'); usenavigate('/'); setToken(false); setIsAuthen(false);setUser([]) }} style={{ border: 'none', background: '#101010' }}><LogoutOutlined style={{ fontSize: 30, color: 'white' }} /> </button>
                                 :
                                 <Link to='/login'><span><LoginOutlined style={{ fontSize: 30, color: "white" }} /></span></Link>
                         }

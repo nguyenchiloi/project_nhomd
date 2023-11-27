@@ -4,14 +4,29 @@ import { BsEye } from 'react-icons/bs';
 import { AiOutlineHeart, AiOutlineCloseCircle } from 'react-icons/ai';
 import './product.css'
 import axios from 'axios';
-import { Col, Image, Row } from 'antd';
+import { Button, Col, Image, Row, message } from 'antd';
 import { AppstoreOutlined } from "@ant-design/icons";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import AddToCart from './addToCart';
 
-const Product = ({ detail, view, close, setClose, addtocart }) => {
+const Product = ({ detail, view, close, setClose,user }) => {
 
     const [listCategory, setListCategogy] = useState([]);
-    const [listProduct, setListProduct] = useState([])
+    const [listProduct, setListProduct] = useState([]);
+    const [messageApi, contextHolder] = message.useMessage();
+    const usenavigate = useNavigate();
+    const success = () => {
+        messageApi.open({
+            type: 'success',
+            content: 'Thêm sản phẩm thành công',
+        });
+    };
+    const error = (message) => {
+        messageApi.open({
+            type: 'error',
+            content: message ? message : 'Thêm sản phẩm thất bại',
+        });
+    };
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/api/products`)
             .then(res => {
@@ -45,8 +60,32 @@ const Product = ({ detail, view, close, setClose, addtocart }) => {
             })
             .catch(error => console.log(error));
     }
+    
+    const addtocart = (value) => {
+        if(!user.id && !localStorage.getItem('token')){
+            usenavigate('/login');
+        }
+        let user_id = user.id;
+        let product_id = value.id;
+        let money = value.money;
+        let quantity = 1;
+        fetch('http://127.0.0.1:8000/api/add-to-cart', {
+            method: "POST",
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify({ user_id, product_id, money, quantity })
+        }).then(res => res.json()).then(data => {
+            if (data.success) {
+                success();
+            } else {
+                error(data.message);
+            }
+        }).catch((err) => {
+            error();
+        })
+    }
     return (
         <>
+            {contextHolder}
             {
                 close ?
                     <div className='product_detail'>
@@ -99,44 +138,44 @@ const Product = ({ detail, view, close, setClose, addtocart }) => {
                                     return (
                                         <>
                                             {dataFilter.length > 3 ?
-                                            <Col span={6}>
-                                                <div className='box' key={index.id}>
-                                                    <div className='img_box'>
-                                                        <Image width={250} src={`./img/${value.photo}`} alt={value.name} />
-                                                        <div className='icon'>
-                                                            <li onClick={() => addtocart(value)}><AiOutlineShoppingCart /></li>
-                                                            <li onClick={() => view(value)}><BsEye /></li>
-                                                            <li><AiOutlineHeart /></li>
+                                                <Col span={6}>
+                                                    <div className='box' key={index.id}>
+                                                        <div className='img_box'>
+                                                            <Image width={250} src={`./img/${value.photo}`} alt={value.name} />
+                                                            <div className='icon'>
+                                                                <li onClick={() => addtocart(value)}><AiOutlineShoppingCart /></li>
+                                                                <li onClick={() => view(value)}><BsEye /></li>
+                                                                <li><AiOutlineHeart /></li>
+                                                            </div>
+                                                        </div>
+                                                        <div className='detail'>
+                                                            <Link to={'/'}>
+                                                                <p>{value.category.name}</p>
+                                                                <h3>{value.name}</h3>
+                                                                <h4>${value.money}</h4>
+                                                            </Link>
                                                         </div>
                                                     </div>
-                                                    <div className='detail'>
-                                                        <Link to={'/'}>
-                                                            <p>{value.category.name}</p>
-                                                            <h3>{value.name}</h3>
-                                                            <h4>${value.money}</h4>
-                                                        </Link>
+                                                </Col>
+                                                : <Col span={8}>
+                                                    <div className='box' key={index.id}>
+                                                        <div className='img_box'>
+                                                            <Image width={250} src={`./img/${value.photo}`} alt={value.name} />
+                                                            <div className='icon'>
+                                                                <li onClick={() => addtocart(value)}><AiOutlineShoppingCart /></li>
+                                                                <li onClick={() => view(value)}><BsEye /></li>
+                                                                <li><AiOutlineHeart /></li>
+                                                            </div>
+                                                        </div>
+                                                        <div className='detail'>
+                                                            <Link to={'/'}>
+                                                                <p>{value.category.name}</p>
+                                                                <h3>{value.name}</h3>
+                                                                <h4>${value.money}</h4>
+                                                            </Link>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </Col>
-                                            : <Col span={8}>
-                                            <div className='box' key={index.id}>
-                                                <div className='img_box'>
-                                                    <Image width={250} src={`./img/${value.photo}`} alt={value.name} />
-                                                    <div className='icon'>
-                                                        <li onClick={() => addtocart(value)}><AiOutlineShoppingCart /></li>
-                                                        <li onClick={() => view(value)}><BsEye /></li>
-                                                        <li><AiOutlineHeart /></li>
-                                                    </div>
-                                                </div>
-                                                <div className='detail'>
-                                                    <Link to={'/'}>
-                                                        <p>{value.category.name}</p>
-                                                        <h3>{value.name}</h3>
-                                                        <h4>${value.money}</h4>
-                                                    </Link>
-                                                </div>
-                                            </div>
-                                        </Col>}
+                                                </Col>}
                                         </>
                                     )
                                 })
@@ -148,5 +187,4 @@ const Product = ({ detail, view, close, setClose, addtocart }) => {
         </>
     )
 }
-
 export default Product
