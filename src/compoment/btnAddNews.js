@@ -11,64 +11,40 @@ const getBase64 = (file) =>
         reader.onerror = (error) => reject(error);
     });
 
-const BtnAddProduct = ({ productapi }) => {
+const BtnAddNews = ({newsapi}) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
-    const [listCategory, setListCategory] = useState([]);
+    const [description, setDescription] = useState("");
     const [fileList, setFileList] = useState([]);
     const [form] = Form.useForm();
-    const [name, setNameProduct] = useState("");
-    const [money, setMoney] = useState("");
-    const [description, setDescription] = useState("");
-    const [category_id, setCategory_id] = useState("");
+    const [title, setTitleProduct] = useState("");
     const [messageApi, contextHolder] = message.useMessage();
-    const [selectedOption, setSelectedOption] = useState(null);
     const photo = fileList[0]?.originFileObj.name;
     const success = () => {
         messageApi.open({
             type: 'success',
-            content: 'Thêm sản phẩm thành công',
+            content: 'Thêm tin tức thành công',
         });
     };
     const error = (message) => {
         messageApi.open({
             type: 'error',
-            content: message ? message : 'Thêm sản phẩm thất bại',
+            content: message ? message : 'Thêm tin tức thất bại',
         });
     };
-    const categoryapi = () => {
-        axios.get(`http://127.0.0.1:8000/api/categories`)
-            .then(res => {
-                const persons = res.data;
-                setListCategory(persons.map((item, index) => {
-                    return {
-                        key: index,
-                        label: item.name,
-                        value: item.id,
-                    }}));
-            })
-            .catch(error => console.log(error));
-    }
-
-    useEffect(() => {
-        categoryapi();
-    }, [])
-    
-    const handlesubmit = async (e) => {
-        // e.preventDefault();
-        let regobj = { name, description, money, photo, category_id };
-        const response = await fetch('http://127.0.0.1:8000/api/admin/products/add-product', {
+    const handlesubmit = (e) => {
+        fetch('http://127.0.0.1:8000/api/admin/new/create', {
             method: "POST",
             headers: { 'content-Type': 'application/json' },
-            body: JSON.stringify(regobj)
+            body: JSON.stringify({ title, description, photo })
         }).then(res => res.json()).then(data => {
             if (data.success) {
                 success();
                 setIsModalVisible(false);
-                productapi();
                 form.resetFields();
+                newsapi();
                 setFileList([])
             } else {
                 error(data.message);
@@ -107,16 +83,12 @@ const BtnAddProduct = ({ productapi }) => {
             </div>
         </div>
     );
-    const handleChangeCategory = (value) => {
-        console.log(value);
-        setCategory_id(value);
-    };
     return (
         <>
             {contextHolder}
             <Button type="primary" icon={<PlusCircleOutlined />} onClick={showModal} size="large" style={{ background: "green", marginLeft: 20 }}>Thêm</Button>
             <Modal
-                title="Thêm sản phẩm"
+                title="Thêm tin tức"
                 open={isModalVisible}
                 maskClosable={false}
                 onCancel={handleCancel}
@@ -126,20 +98,20 @@ const BtnAddProduct = ({ productapi }) => {
                     <Row className="d-flex" justify="start" gutter={[0, 15]}>
                         <Col xl={24} lg={24} md={24} sm={24} xs={24}>
                             <Form.Item
-                                name="name"
-                                label="Tên sản phẩm:"
-                                rules={[{ required: true, message: 'vui lòng nhập tên sản phẩm' }]}
+                                name="title"
+                                label="Tiêu đề:"
+                                rules={[{ required: true, message: 'vui lòng nhập tên tin tức' }]}
                             >
-                                <Input placeholder="Nhập tên sản phẩm" name="name" onChange={e => setNameProduct(e.target.value)} />
+                                <Input placeholder="Nhập tiêu đề" name="title" onChange={e => setTitleProduct(e.target.value)} />
                             </Form.Item>
                         </Col>
                         <Col xl={24} lg={24} md={24} sm={24} xs={24}>
                             <Form.Item
-                                name="money"
-                                label="Giá bán"
-                                rules={[{ required: true, message: 'vui lòng nhập giá bán' }]}
+                                name="description"
+                                label="Mô tả"
+                                rules={[{ required: true, message: 'vui lòng nhập mô tả' }]}
                             >
-                                <Input type="number" placeholder="Nhập giá bán" name="money" onChange={e => setMoney(e.target.value)}></Input>
+                                <TextArea placeholder="Nhập mô tả" name="description" onChange={e => setDescription(e.target.value)}/>
                             </Form.Item>
                         </Col>
                         <Col xl={24} lg={24} md={24} sm={24} xs={24}>
@@ -167,32 +139,10 @@ const BtnAddProduct = ({ productapi }) => {
                                 </Modal>
                             </Form.Item>
                         </Col>
-                        <Col xl={24} lg={24} md={24} sm={24} xs={24}>
-                            <Form.Item
-                                name="category_id"
-                                label="Danh mục"
-                                rules={[{ required: true, message: 'vui lòng chọn thể loại' }]}
-                            >
-                                <Select
-                                    style={{ width: 470 }}
-                                    onChange={handleChangeCategory}
-                                    options={listCategory}
-                                />
-                            </Form.Item>
-                        </Col>
-                        <Col xl={24} lg={24} md={24} sm={24} xs={24}>
-                            <Form.Item
-                                name="description"
-                                label="Mô tả"
-                                rules={[{ required: true, message: 'vui lòng nhập mô tả' }]}
-                            >
-                                <TextArea placeholder="Nhập mô tả" name="description" onChange={e => setDescription(e.target.value)}></TextArea>
-                            </Form.Item>
-                        </Col>
                     </Row>
                 </Form>
             </Modal>
         </>
     )
 }
-export default BtnAddProduct
+export default BtnAddNews;

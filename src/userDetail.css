@@ -1,0 +1,12 @@
+.tong{
+    text-align: center;
+    background-color: #2b2b2b;
+    border-bottom: 1px solid gray;
+    color: #68635c;
+}
+/* .tong h1{
+    color: #68635c;
+} */
+.tong .ant-col{
+    font-size: 20px;
+}

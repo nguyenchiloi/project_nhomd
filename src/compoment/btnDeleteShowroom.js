@@ -2,28 +2,28 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Popover, Space, message } from "antd";
 
 
-const BtnDeleteProduct = ({ id, productapi }) => {
+const BtnDeleteShowroom = ({ id, showroomapi }) => {
     const [messageApi, contextHolder] = message.useMessage();
     const success = (message) => {
         messageApi.open({
             type: 'success',
-            content: message ? message :'Xóa sản phẩm thành công',
+            content: message ? message :'Xóa cửa hàng thành công',
         });
     };
     const error = (message) => {
         messageApi.open({
             type: 'error',
-            content: message ? message : 'Xóa sản phẩm thất bại',
+            content: message ? message : 'Xóa cửa hàng thất bại',
         });
     };
     const onsubmitDelete = () => {
-        fetch(`http://127.0.0.1:8000/api/admin/products/delete/${id}`, {
+        fetch(`http://127.0.0.1:8000/api/admin/showroom/delete/${id}`, {
             method: "POST",
             headers: { 'content-Type': 'application/json' },
         }).then(res => res.json()).then(data => {
             if (data.success) {
                 success();
-                productapi();
+                showroomapi();
             } else {
                 error(data.message);
             }
@@ -37,7 +37,7 @@ const BtnDeleteProduct = ({ id, productapi }) => {
             <Popover
                 content={
                     <div>
-                        Chọn xác nhận để xoá sản phẩm này!
+                        Chọn xác nhận để xoá cửa hàng này!
                         <Space className="d-flex justify-content-flex-end mt-1">
                             <Button style={{ marginTop: 20 }} type="primary" onClick={onsubmitDelete}>Xác nhận</Button>
                         </Space>
@@ -53,4 +53,4 @@ const BtnDeleteProduct = ({ id, productapi }) => {
         </>
     );
 }
-export default BtnDeleteProduct;
+export default BtnDeleteShowroom;

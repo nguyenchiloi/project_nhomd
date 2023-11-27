@@ -166,7 +166,7 @@ const BtnEditProduct = ({ _ ,id,productapi}) => {
                         <Col xl={24} lg={24} md={24} sm={24} xs={24}>
                             <Form.Item
                                 name="category_id"
-                                label="Thể loại"
+                                label="Danh mục"
                                 rules={[{ required: true, message: 'vui lòng chọn thể loại' }]}
                             >
                                 <Select

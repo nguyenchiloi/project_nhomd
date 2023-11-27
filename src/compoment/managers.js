@@ -6,13 +6,20 @@ import {
   UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
-  UnorderedListOutlined
+  UnorderedListOutlined,
+  BankOutlined,
+  FileTextOutlined,
+  ContactsOutlined
 } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
 import ProductManager from './productManager';
+import CategoryManager from './categoryManager';
 import axios from 'axios';
+import UserManager from './userManager';
+import ShowroomManager from './showroomManager';
+import NewsManager from './NewsManager';
+import ContactManager from './contactManager';
 const { Header, Sider, Content } = Layout;
 const Managers = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -59,6 +66,24 @@ const Managers = () => {
                 label: 'Quản lý user',
                 onClick: () => setContent(3),
               },
+              {
+                key: '4',
+                icon: <BankOutlined />,
+                label: 'Quản lý showroom',
+                onClick: () => setContent(4),
+              },
+              {
+                key: '5',
+                icon: <FileTextOutlined />,
+                label: 'Quản lý tin tức',
+                onClick: () => setContent(5),
+              },
+              {
+                key: '6',
+                icon: <ContactsOutlined />,
+                label: 'Quản lý liên hệ',
+                onClick: () => setContent(6),
+              },
             ]}
           />
         </Sider>
@@ -91,7 +116,16 @@ const Managers = () => {
             {content === 1 ?
               <ProductManager />
               : content === 2 ?
-                content : ''}
+                <CategoryManager />
+                : content === 3 ?
+                  <UserManager />
+                  : content === 4 ?
+                    <ShowroomManager />
+                    : content === 5 ?
+                      <NewsManager />
+                      : content === 6 ?
+                        <ContactManager />
+                        : ''}
           </Content>
         </Layout>
       </Layout>

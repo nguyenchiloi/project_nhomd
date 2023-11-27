@@ -6,16 +6,16 @@ import { Link } from "react-router-dom";
 const ResetPassword = () => {
     const [email, setEmail] = useState("");
     const [messageApi, contextHolder] = message.useMessage();
-    const success = () => {
+    const success = (message) => {
         messageApi.open({
             type: 'success',
-            content: 'Gửi yêu cầu thành công',
+            content: message ? message : 'Gửi yêu cầu thành công',
         });
     };
     const error = (message) => {
         messageApi.open({
             type: 'error',
-            content: 'Gửi yêu cầu thất bại',
+            content: message ? message : 'Gửi yêu cầu thất bại',
         });
     };
     const handleSubmit = async (e) => {
@@ -27,10 +27,9 @@ const ResetPassword = () => {
                 body: JSON.stringify(regobj)
             }).then(res => res.json()).then(data => {
                 if (data.success) {
-                    console.log(data);
-                    error(data.message);
-                } else {
                     success();
+                } else {
+                    error();
                 }
             }).catch((err) => {
                 error();
