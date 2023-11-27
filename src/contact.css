@@ -9,7 +9,7 @@
 {
     padding: 30px 40px;
     width: 100%;
-    background: #2b2b2b;
+    background: hsl(0, 0%, 17%);
     border-bottom: 1px solid #9a9a9a;
 }
 .contact_container .contant
