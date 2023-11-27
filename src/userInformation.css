@@ -1,0 +1,81 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Times New Roman', Times, serif;
+    box-sizing: border-box;
+}
+.usern{
+    display: flex;
+    border-bottom: #b1b1b2 solid 2px;
+    width: 50%;
+}
+.hintname{
+    color: #b1b1b2;
+    margin: 10px;
+    width: 50%;
+}
+.name{
+    margin: 10px;
+}
+.usere{
+    display: flex;
+    border-bottom: #b1b1b2 solid 2px;
+    width: 50%;
+}
+.hintemail{
+    color: #b1b1b2;
+    margin: 10px;
+    width: 50%;
+}
+.email{
+    margin: 10px;
+}
+.userp{
+    display: flex;
+    border-bottom: #b1b1b2 solid 2px;
+    width: 50%;
+}
+.hintphone{
+    color: #b1b1b2;
+    margin: 10px;
+    width: 50%;
+}
+.phone{
+    margin: 10px;
+}
+.infor{
+    margin-top: 25px;
+}
+.frame{
+    margin-left: 50px;
+}
+@-webkit-keyframes my {
+    0% { color: #F8CD0A; } 
+    50% { color: #fff;  } 
+    100% { color: #F8CD0A;  } 
+}
+@-moz-keyframes my { 
+    0% { color: #F8CD0A;  } 
+    50% { color: #fff;  }
+    100% { color: #F8CD0A;  } 
+}
+@-o-keyframes my { 
+    0% { color: #F8CD0A; } 
+    50% { color: #fff; } 
+    100% { color: #F8CD0A;  } 
+}
+@keyframes my { 
+    0% { color: #F8CD0A;  } 
+    50% { color: #fff;  }
+    100% { color: #F8CD0A;  } 
+} 
+.usern {
+        background:#3d3d3d;
+        font-size:18px;
+        font-weight:bold;
+    -webkit-animation: my 700ms infinite;
+    -moz-animation: my 700ms infinite; 
+    -o-animation: my 700ms infinite; 
+    animation: my 700ms infinite;
+}

@@ -10,13 +10,12 @@ import { Layout, Menu, Button, theme } from 'antd';
 import ResetPasswordUser from './resetPasswordUser';
 import UserInformation from './userInformation';
 const { Header, Sider, Content } = Layout;
-const UserDetail = (key) => {
+const UserDetail = ({user}) => {
   const [collapsed, setCollapsed] = useState(false);
   const [content, setContent] = useState(1);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  console.log({key});
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -73,7 +72,7 @@ const UserDetail = (key) => {
             background: colorBgContainer,
           }}
         >
-          {content === 1? <UserInformation/>: content === 2?<ResetPasswordUser/>:''}
+          {content === 1? <UserInformation user = {user}/>: content === 2?<ResetPasswordUser/>:''}
         </Content>
       </Layout>
     </Layout>
