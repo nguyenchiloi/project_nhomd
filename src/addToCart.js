@@ -7,13 +7,13 @@ const AddToCart = (value, user) => {
     const success = () => {
         messageApi.open({
             type: 'success',
-            content: 'Thêm tin tức thành công',
+            content: 'Thêm sản phẩm vào giỏ hàng thành công',
         });
     };
     const error = (message) => {
         messageApi.open({
             type: 'error',
-            content: message ? message : 'Thêm tin tức thất bại',
+            content: message ? message : 'Thêm ản phẩm vào giỏ hàng thất bại',
         });
     };  
     const user_id = user.id;
