@@ -9,11 +9,22 @@
 .inDam {
     font-weight: bold;
 }
-
-.fullStep {
-    margin: 10px 10px 0 10px;
+.guarantee{
+    border-bottom: 1px solid gray;
 }
-
+.fullStep {
+    margin-left: 27%;
+    margin-bottom: 50px;
+}
+.guarantee h3{
+    color: #f37777;
+    margin-left: 50px;
+    margin-bottom: 20px;
+}
+.guarantee h4{
+    color: #f37777;
+    margin-left: 70px;
+}
 .buoc1 {
     background: white;
     color: #000;
@@ -133,7 +144,10 @@
     left: 20%;
 
 } */
-
+.dkbh{
+    width: 90%;
+    margin-left: 5%;
+}
 .title-dkbh {
     padding: 10px;
     padding-top: 20%;
@@ -169,4 +183,8 @@
     padding-top: 5px;
     padding-bottom: 5px;
     line-height: 1.6;
+}
+.doiMoi{
+    width: 90%;
+    margin-left: 5%;
 }

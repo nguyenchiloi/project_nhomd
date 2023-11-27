@@ -14,7 +14,7 @@ import UserDetail from './userDetail'
 import Showroom from './showroom'
 import Guarantee from './guarantee'
 import News from './news'
-const Rout = ({setIsAuthen,product, setProduct, detail, view, close, setClose, userapi, user}) => {
+const Rout = ({setIsAuthen, detail, view, close, setClose, userapi, user},key) => {
   return (
     <>
     <Routes>
@@ -28,7 +28,7 @@ const Rout = ({setIsAuthen,product, setProduct, detail, view, close, setClose, u
         <Route path='/resetpassword' element={<ResetPassword />} />
         <Route path='/productManager' element={<ProductManager />} />
         <Route path='/managers' element={<Managers />} />
-        <Route path='/userdetail' element={<UserDetail/>}/>
+        <Route path='/userdetail' element={<UserDetail key={key}/>}/>
         <Route path='/showroom' element={<Showroom/>}/>
         <Route path='/guarantee' element={<Guarantee/>}/>
         <Route path='/news' element={<News/>}/>

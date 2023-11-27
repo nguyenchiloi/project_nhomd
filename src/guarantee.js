@@ -5,7 +5,7 @@ const Guarantee = () => {
         <>
             <div className="guarantee" style={{ color: "white", background: "#2b2b2b" }}>
                 <h1 style={{ textAlign: "center" }}>Chính sách bảo hành tại Công Nghệ Sài Gòn</h1>
-                <h3 style={{ color: "#f37777", marginLeft: "10px" }}>I. CÁC BƯỚC BẢO HÀNH SẢN PHẨM</h3>
+                <h3>I. CÁC BƯỚC BẢO HÀNH SẢN PHẨM</h3>
                 <div className="fullStep">
                     <div className="buoc1">
                         <div className="step1"> Bước 1 </div>
@@ -35,7 +35,7 @@ const Guarantee = () => {
                     </div>
                 </div>
 
-                <h3 style={{ color: "#f37777", marginLeft: "10px", marginTop: "25px" }}>II. ĐIỀU KIỆN ĐỂ BẢO HÀNH SẢN PHẨM</h3>
+                <h3>II. ĐIỀU KIỆN ĐỂ BẢO HÀNH SẢN PHẨM</h3>
                 <div className="dkbh">
                     <Row>
                         <Col span={6} style={{ borderRight: "1px solid red" }}>
@@ -102,8 +102,8 @@ const Guarantee = () => {
                     </Row>
                 </div>
 
-                <h3 style={{ color: "#f37777", marginLeft: "10px", marginTop: "20px" }}>III. CHÍNH SÁCH BẢO HÀNH CHUNG</h3>
-                <h4 style={{ color: "#f37777", marginLeft: "25px" }}>1. Chính sách đổi mới 100%</h4>
+                <h3>III. CHÍNH SÁCH BẢO HÀNH CHUNG</h3>
+                <h4>1. Chính sách đổi mới 100%</h4>
                 <div className="doiMoi">
                     <Row>
                         <Col span={6}>
@@ -129,43 +129,45 @@ const Guarantee = () => {
                     </Row>
                 </div>
 
-                <h4 style={{ color: "#f37777", marginLeft: "25px" }}>2. Thời gian xử lý đối với bảo hành sản phẩm</h4>
-                <Row>
-                    <Col span={6}>
-                        <div className="title-tgxl">
-                            <p className="inDam">A. Lỗi do nhà sản xuất</p>
-                        </div>
-                    </Col>
-                    <Col span={18}>
-                        <div className="content-tgxl">
-                            Nhân viên kĩ thuật - bảo hành Công Nghệ Sài Gòn tiến hành kiểm tra ngay thời điểm tiếp nhận sản phẩm bảo hành:
-                            <ul>
-                                <li>
-                                    Phát hiện ra lỗi:
-                                </li>
-                            </ul>
-                            Công Nghệ Sài Gòn tiến hành xử lý bảo hành theo chính sách bảo hành của sản phẩm.
-                            <ul>
-                                <li>
-                                    Chưa phát hiện ra lỗi:
-                                </li>
-                            </ul>
-                            Công Nghệ Sài Gòn có thể giữ lại sản phẩm để tiếp tục kiểm tra trong vòng 3 ngày làm việc nếu có yêu cầu kiểm tra của khách hàng(không bao gồm thứ 7, Chủ Nhật & các ngày Lễ, Tết).
-                            Sau 3 ngày kiểm tra vẫn chưa phát hiện được lỗi của sản phẩm, Công Nghệ Sài Gòn xin phép hoàn trả lại sản phẩm đến quý khách.
-                        </div>
-                    </Col>
+                <h4>2. Thời gian xử lý đối với bảo hành sản phẩm</h4>
+                <div className="doiMoi">
+                    <Row>
+                        <Col span={6}>
+                            <div className="title-tgxl">
+                                <p className="inDam">A. Lỗi do nhà sản xuất</p>
+                            </div>
+                        </Col>
+                        <Col span={18}>
+                            <div className="content-tgxl">
+                                Nhân viên kĩ thuật - bảo hành Công Nghệ Sài Gòn tiến hành kiểm tra ngay thời điểm tiếp nhận sản phẩm bảo hành:
+                                <ul>
+                                    <li>
+                                        Phát hiện ra lỗi:
+                                    </li>
+                                </ul>
+                                Công Nghệ Sài Gòn tiến hành xử lý bảo hành theo chính sách bảo hành của sản phẩm.
+                                <ul>
+                                    <li>
+                                        Chưa phát hiện ra lỗi:
+                                    </li>
+                                </ul>
+                                Công Nghệ Sài Gòn có thể giữ lại sản phẩm để tiếp tục kiểm tra trong vòng 3 ngày làm việc nếu có yêu cầu kiểm tra của khách hàng(không bao gồm thứ 7, Chủ Nhật & các ngày Lễ, Tết).
+                                Sau 3 ngày kiểm tra vẫn chưa phát hiện được lỗi của sản phẩm, Công Nghệ Sài Gòn xin phép hoàn trả lại sản phẩm đến quý khách.
+                            </div>
+                        </Col>
 
-                    <Col span={6}>
-                        <div className="title-tgxl">
-                            <p className="inDam">B. Lỗi do người dùng</p>
-                        </div>
-                    </Col>
-                    <Col span={18}>
-                        <div className="content-tgxl">
-                            Công Nghệ Sài Gòn từ chối bảo hành các sản phẩm lỗi phát sinh do người sử dụng.
-                        </div>
-                    </Col>
-                </Row>
+                        <Col span={6}>
+                            <div className="title-tgxl">
+                                <p className="inDam">B. Lỗi do người dùng</p>
+                            </div>
+                        </Col>
+                        <Col span={18}>
+                            <div className="content-tgxl">
+                                Công Nghệ Sài Gòn từ chối bảo hành các sản phẩm lỗi phát sinh do người sử dụng.
+                            </div>
+                        </Col>
+                    </Row>
+                </div>
             </div>
         </>
     )

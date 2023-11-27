@@ -8,7 +8,7 @@ import { Button, Col, Input, Row, Dropdown, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import UserDetail from './userDetail';
 
-const Nav = ({ isAuthen, setIsAuthen,setUser }) => {
+const Nav = ({ isAuthen, setIsAuthen,setUser, setKey }) => {
     const [search, setSearch] = useState();
     const usenavigate = useNavigate();
     const [token, setToken] = useState();
@@ -18,18 +18,19 @@ const Nav = ({ isAuthen, setIsAuthen,setUser }) => {
     let nameUser = localStorage.getItem('name');
     const items = [
         {
-            label: <Link to={'/userdetail'} key={1}>Thông tin người dùng</Link>,
-            key: '1',
+            label: <Link to={'/userdetail'} key={1} onClick={()=> setKey(items[0].key)}>Thông tin người dùng</Link>,
+            key: 1,
         },
         {
-            label: <Link to={'/userdetail'} key={2}>Thay đổi mật khẩu</Link>,
-            key: '2',
+            label: <Link to={'/userdetail'} key={2} onClick={()=> setKey(items[1].key)}>Thay đổi mật khẩu</Link>,
+            key: 2,
         },
         {
-            label: <Link to={'/userdetail'} key={3}>'Xem chi tiết đơn hàng'</Link>,
-            key: '3',
+            label: <Link to={'/userdetail'} key={3} onClick={()=> setKey(items[2].key)}>'Xem chi tiết đơn hàng'</Link>,
+            key: 3,
         },
     ];
+    
     return (
         <>
             <div className='free'>

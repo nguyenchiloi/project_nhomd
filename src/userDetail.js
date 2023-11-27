@@ -4,18 +4,19 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   UnorderedListOutlined,
-  UploadOutlined,
   UserOutlined,
-  VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
+import ResetPasswordUser from './resetPasswordUser';
+import UserInformation from './userInformation';
 const { Header, Sider, Content } = Layout;
-const UserDetail = () => {
+const UserDetail = (key) => {
   const [collapsed, setCollapsed] = useState(false);
   const [content, setContent] = useState(1);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  console.log({key});
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -72,6 +73,7 @@ const UserDetail = () => {
             background: colorBgContainer,
           }}
         >
+          {content === 1? <UserInformation/>: content === 2?<ResetPasswordUser/>:''}
         </Content>
       </Layout>
     </Layout>
