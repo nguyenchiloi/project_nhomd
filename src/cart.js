@@ -56,7 +56,6 @@ const Cart = ({ user }) => {
     useEffect(() => {
         axios.post(`http://127.0.0.1:8000/api/cart/detail`, {
             user_id: user.id
-
         }).then(res => {
             const persons = res.data.data.product_details;
             setListCart(persons);
@@ -128,8 +127,8 @@ const Cart = ({ user }) => {
             <div className='cartcontainer'>
                 {listCart.length === 0 &&
                     <div className='emptycart'>
-                        <h2 className='empty'>Cart is Empty</h2>
-                        <Link to='/product' className='emptycartbtn'>Shop Now</Link>
+                        <h2 className='empty'>Giỏ hàng rỗng</h2>
+                        <Link to='/product' className='emptycartbtn'>Tới sản phẩm ngay bây giờ</Link>
                     </div>
                 }
                 <div className='contant'>

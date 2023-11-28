@@ -27,10 +27,13 @@ const Pay = ({ user, listCart }) => {
     };
     const handlesubmit = async () => {
         let user_id = user.id;
+        let name = user.name;
+        let email = user.email;
+        let phone = user.phone;
         await fetch('http://127.0.0.1:8000/api/payment', {
             method: "POST",
             headers: { 'content-Type': 'application/json' },
-            body: JSON.stringify({ user_id, address })
+            body: JSON.stringify({ user_id, name, email, phone, address })
         }).then(res => res.json()).then(data => {
             if (data.success) {
                 success();
@@ -78,7 +81,7 @@ const Pay = ({ user, listCart }) => {
 
                             )
                         })}
-                        <div style={{ textAlign: "center"}}>Tổng tiền: {listCart.reduce((money, item) => money + item.quantity * item.product_price, 0)} $</div>
+                        <div style={{ textAlign: "center" }}>Tổng tiền: {listCart.reduce((money, item) => money + item.quantity * item.product_price, 0)} $</div>
                         <Col xl={24} lg={24} md={24} sm={24} xs={24}>
                             <Form.Item
                                 name="address"

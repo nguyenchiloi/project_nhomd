@@ -90,7 +90,7 @@ const ContactManager = () => {
             key: 'action',
             render: (_, record) => (
                 <Space direction="vertical" size="middle">
-                    <BtnReplyContact _={_} />
+                    <BtnReplyContact _={_} contactsapi={contactsapi}/>
                     <BtnDeleteContact id={record.id} contactsapi={contactsapi} />
                 </Space>
             ),

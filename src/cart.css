@@ -20,6 +20,7 @@
 }
 .cartcontainer .emptycart h2
 {
+    margin-left: 60px;
     font-size: 32px;
     color: white;
     text-transform: uppercase;
@@ -29,6 +30,28 @@
 .cartcontainer .emptycart .emptycartbtn
 {
     margin-left: 70px;
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    background: rgb(104, 99, 92);
+    border-radius: 10px;
+} 
+.cartcontainer .ronglike
+{
+    margin-top: 30px;
+    margin-left: 36%;
+}
+.cartcontainer .ronglike h2
+{
+    font-size: 32px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 300;
+    margin-bottom: 30px;
+}
+.cartcontainer .ronglike .emptycartbtn
+{
+    margin-left: 140px;
     text-decoration: none;
     color: #fff;
     padding: 10px 20px;
@@ -157,4 +180,8 @@
 {
     margin-top: 40px;
     margin-left: 46%;
+}
+.cartcontainer .contant .cart_item  .detail .info .description{
+    font-size: 18px;
+    color: #010f1c !important;
 }

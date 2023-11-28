@@ -3,9 +3,7 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   ShoppingCartOutlined,
-  UploadOutlined,
   UserOutlined,
-  VideoCameraOutlined,
   UnorderedListOutlined,
   BankOutlined,
   FileTextOutlined,
@@ -20,6 +18,7 @@ import UserManager from './userManager';
 import ShowroomManager from './showroomManager';
 import NewsManager from './NewsManager';
 import ContactManager from './contactManager';
+import OderManager from './oderManager';
 const { Header, Sider, Content } = Layout;
 const Managers = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -84,6 +83,12 @@ const Managers = () => {
                 label: 'Quản lý liên hệ',
                 onClick: () => setContent(6),
               },
+              {
+                key: '7',
+                icon: <ShoppingCartOutlined />,
+                label: 'Quản lý đơn hàng',
+                onClick: () => setContent(7),
+              },
             ]}
           />
         </Sider>
@@ -125,7 +130,9 @@ const Managers = () => {
                       <NewsManager />
                       : content === 6 ?
                         <ContactManager />
-                        : ''}
+                        : content === 7 ?
+                          <OderManager />
+                          : ''}
           </Content>
         </Layout>
       </Layout>

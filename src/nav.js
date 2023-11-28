@@ -8,8 +8,7 @@ import { Button, Col, Input, Row, Dropdown, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import UserDetail from './userDetail';
 
-const Nav = ({ isAuthen, setIsAuthen,setUser, setKey }) => {
-    const [search, setSearch] = useState();
+const Nav = ({ isAuthen, setIsAuthen,setUser }) => {
     const usenavigate = useNavigate();
     const [token, setToken] = useState();
     useEffect(() => {
@@ -18,16 +17,8 @@ const Nav = ({ isAuthen, setIsAuthen,setUser, setKey }) => {
     let nameUser = localStorage.getItem('name');
     const items = [
         {
-            label: <Link to={'/userdetail'} key={1} onClick={()=> setKey(items[0].key)}>Thông tin người dùng</Link>,
+            label: <Link to={'/userdetail'} >Thông tin người dùng</Link>,
             key: 1,
-        },
-        {
-            label: <Link to={'/userdetail'} key={2} onClick={()=> setKey(items[1].key)}>Thay đổi mật khẩu</Link>,
-            key: 2,
-        },
-        {
-            label: <Link to={'/userdetail'} key={3} onClick={()=> setKey(items[2].key)}>'Xem chi tiết đơn hàng'</Link>,
-            key: 3,
         },
     ];
     
@@ -75,7 +66,7 @@ const Nav = ({ isAuthen, setIsAuthen,setUser, setKey }) => {
                                     }
                                 </Col>
                                 <Col md={3}>
-                                    <Link to="/"><AiOutlineHeart style={{ fontSize: 30, color: "white" }} /></Link>
+                                    <Link to="/like"><AiOutlineHeart style={{ fontSize: 30, color: "white" }} /></Link>
                                 </Col>
                                 <Col md={3}>
                                     <Link to="/cart"><BsBagCheck style={{ fontSize: 30, color: "white" }} /></Link>

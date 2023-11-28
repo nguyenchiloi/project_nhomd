@@ -14,6 +14,8 @@ import UserDetail from './userDetail'
 import Showroom from './showroom'
 import Guarantee from './guarantee'
 import News from './news'
+import ViewLove from './viewlove'
+import ProductDetail from './productdetail'
 const Rout = ({setIsAuthen, detail, view, close, setClose, userapi, user}) => {
   return (
     <>
@@ -21,6 +23,7 @@ const Rout = ({setIsAuthen, detail, view, close, setClose, userapi, user}) => {
         <Route path='/' element={<Home detail={detail} view={view} close={close} setClose={setClose} user={user}/>}/>
         <Route path='/product' element={<Product detail={detail} view={view} close={close} setClose={setClose} user={user}/>}/>
         <Route path='/cart' element={<Cart user={user}/>} />
+        <Route path='/like' element={<ViewLove user={user}/>} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/about' element={<About /> }/>
         <Route path='/login' element={<Login setIsAuthen={setIsAuthen} userapi={userapi}/>} />
@@ -32,6 +35,7 @@ const Rout = ({setIsAuthen, detail, view, close, setClose, userapi, user}) => {
         <Route path='/showroom' element={<Showroom/>}/>
         <Route path='/guarantee' element={<Guarantee/>}/>
         <Route path='/news' element={<News/>}/>
+        <Route path='/productdetail' element={<ProductDetail/>}/>
     </Routes>
     </>
   )

@@ -14,7 +14,8 @@ const App = () => {
   const [detail, setDetail] = useState([])
   //filter product
   const [product, setProduct] = useState([]);
-  const [key,setKey] = useState([]);
+  const [key,setKey] = useState(0);
+  localStorage.setItem('key',key);
   //product detail
   const view = (product) => {
     setDetail([{ ...product }])
@@ -40,9 +41,9 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <Nav isAuthen={isAuthen} setIsAuthen={setIsAuthen} setUser={setUser}  setKey={setKey} key={key}/>
+        <Nav isAuthen={isAuthen} setIsAuthen={setIsAuthen} setUser={setUser}  setKey={setKey}/>
         <>
-          <Rout setIsAuthen={setIsAuthen} product={product} setProduct={setProduct} detail={detail} view={view} close={close} setClose={setClose} user={user} userapi={userapi} key={key}/>
+          <Rout setIsAuthen={setIsAuthen} product={product} setProduct={setProduct} detail={detail} view={view} close={close} setClose={setClose} user={user} userapi={userapi}/>
           <Footer />
         </>
       </BrowserRouter>
