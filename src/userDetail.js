@@ -9,8 +9,10 @@ import {
 import { Layout, Menu, Button, theme } from 'antd';
 import ResetPasswordUser from './resetPasswordUser';
 import UserInformation from './userInformation';
+import ViewOrderDetail from './viewOrderDetail';
 const { Header, Sider, Content } = Layout;
-const UserDetail = ({user}) => {
+
+const UserDetail = ({ user }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [content, setContent] = useState(1);
   const {
@@ -72,7 +74,7 @@ const UserDetail = ({user}) => {
             background: colorBgContainer,
           }}
         >
-          {content === 1? <UserInformation user = {user}/>: content === 2?<ResetPasswordUser/>:''}
+          {content === 1 ? <UserInformation user={user} /> : content === 2 ? <ResetPasswordUser /> : content === 3 ? <ViewOrderDetail user={user} />: ''}
         </Content>
       </Layout>
     </Layout>

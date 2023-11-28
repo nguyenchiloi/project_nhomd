@@ -23,8 +23,6 @@ const ResetPasswordUser = () => {
          content: message ? message : 'Đổi mật khẩu thất bại',
       });
    };
-   const headers = { Authorization: `Bearer ${token}` }
-   console.log(headers);
    const handleSubmit = () => {
       const ob = { password: password, n_password: n_password, r_password: r_password };
       axios.request(
@@ -34,6 +32,7 @@ const ResetPasswordUser = () => {
          headers:{Authorization: `Bearer ${token}`},
          data:ob
       }
+<<<<<<< HEAD
       ).then(res => res.json()).then(data => {
          if (data.status === 200) {
             success();
@@ -42,6 +41,15 @@ const ResetPasswordUser = () => {
             error(data.message);
          }
          console.log(data);
+=======
+      ).then(res => {
+         if (res.status === 200) {
+            success();
+            form.resetFields();
+         } else {
+            error();
+         }
+>>>>>>> 490cd30613ffb6fba790624c9f92962abe500206
       }).catch((err) => {
          error();
       })

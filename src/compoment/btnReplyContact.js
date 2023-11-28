@@ -3,13 +3,14 @@ import { Button, Col, Form, Input, Modal, Row, Select, message } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useEffect, useState } from "react";
 
-const BtnReplyContact = ({ _ }) => {
+const BtnReplyContact = ({ _, contactsapi }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [name, setName] = useState(_.name);
     const [messageApi, contextHolder] = message.useMessage();
     const [title, setTitle] = useState(_.title);
     const [email, setGmail] = useState(_.email);
-    const [messages, setMessage] = useState("");
+    const [messages, setMessage] = useState();
+    const description = useState(_.message);
     const [form] = Form.useForm();
     const success = (message) => {
         messageApi.open({
@@ -48,6 +49,7 @@ const BtnReplyContact = ({ _ }) => {
         }).then(res => res.json()).then(data => {
             if (data.success) {
                 success();
+                contactsapi();
             } else {
                 error(data.message);
             }
@@ -60,7 +62,7 @@ const BtnReplyContact = ({ _ }) => {
             {contextHolder}
             <Button size="large" type="primary" style={{ backgroundColor: "#ff9c00" }} icon={<EditOutlined />} onClick={showModal}>Trả lời</Button>
             <Modal
-                title="Thêm danh mục"
+                title="Trả lời liên hệ"
                 open={isModalVisible}
                 maskClosable={false}
                 onCancel={handleCancel}
@@ -69,46 +71,26 @@ const BtnReplyContact = ({ _ }) => {
                 <Form form={form} layout="vertical" onFinish={handlesubmit}>
                     <Row className="d-flex" justify="start" gutter={[0, 15]}>
                         <Col xl={24} lg={24} md={24} sm={24} xs={24}>
+                            <label>Tên người dùng: {name}</label>
+                        </Col>
+                        <Col xl={24} lg={24} md={24} sm={24} xs={24}>
+                            <label>Email: {email}</label>
+                        </Col>
+                        <Col xl={24} lg={24} md={24} sm={24} xs={24}>
+                            <label>Tiêu đề liên hệ: {title}</label>
+                        </Col>
+                        <Col xl={24} lg={24} md={24} sm={24} xs={24}>
+                            <label>Nội dung: {description}</label>
+                        </Col>
+                        <Col xl={24} lg={24} md={24} sm={24} xs={24}>
                             <Form.Item
-                                name="name"
-                                label="Tên người dùng:"
-                                rules={[{ required: true, message: 'vui lòng nhập tên người dùng' }]}
+                                name="message"
+                                label="Trả lời"
+                                rules={[{ required: true, message: 'vui lòng nhập trả lời' }]}
                             >
-                                <Input placeholder="Nhập tên người dùng" name="name" onChange={e => setName(e.target.value)} />
+                                <TextArea placeholder="Nhập câu trả lời"  onChange={e => setMessage(e.target.value)} />
                             </Form.Item>
                         </Col>
-                        <Col xl={24} lg={24} md={24} sm={24} xs={24}>
-                            <Form.Item rules={[
-                                {
-                                    required: true,
-                                    message: "Vui lòng nhập email",
-                                },
-                                {
-                                    pattern: "^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
-                                    message: "Email không hợp lệ",
-                                },
-                            ]} name="email" label="Email">
-                                <Input size="large" placeholder="Nhập gmail" prefix={<UserOutlined />} name="email" value={email} onChange={e => setGmail(e.target.value)} />
-                            </Form.Item>
-                        </Col>
-                        <Col xl={24} lg={24} md={24} sm={24} xs={24}>
-                                    <Form.Item
-                                        name="title"
-                                        label="Tiêu đề:"
-                                        rules={[{ required: true, message: 'vui lòng nhập tiêu đề' }]}
-                                    >
-                                        <Input placeholder="Nhập tiêu đề" name="title" onChange={e => setTitle(e.target.value)} />
-                                    </Form.Item>
-                                </Col>
-                                <Col xl={24} lg={24} md={24} sm={24} xs={24}>
-                                    <Form.Item
-                                        name="message"
-                                        label="Trả lời"
-                                        rules={[{ required: true, message: 'vui lòng nhập trả lời' }]}
-                                    >
-                                        <TextArea placeholder="Nhập câu trả lời" name="message" onChange={e => setMessage(e.target.value)} />
-                                    </Form.Item>
-                                </Col>
 
                     </Row>
                 </Form>

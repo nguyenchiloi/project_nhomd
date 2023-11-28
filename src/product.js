@@ -9,7 +9,7 @@ import { AppstoreOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from 'react-router-dom';
 import AddToCart from './addToCart';
 
-const Product = ({ detail, view, close, setClose,user }) => {
+const Product = ({ detail, view, close, setClose, user }) => {
 
     const [listCategory, setListCategogy] = useState([]);
     const [listProduct, setListProduct] = useState([]);
@@ -25,6 +25,18 @@ const Product = ({ detail, view, close, setClose,user }) => {
         messageApi.open({
             type: 'error',
             content: message ? message : 'Thêm sản phẩm thất bại',
+        });
+    };
+    const successview = () => {
+        messageApi.open({
+            type: 'success',
+            content: 'Thêm sản phẩm yêu thích thành công',
+        });
+    };
+    const errorview = (message) => {
+        messageApi.open({
+            type: 'error',
+            content: message ? message : 'Thêm sản phẩm yêu thích thất bại',
         });
     };
     useEffect(() => {
@@ -78,6 +90,26 @@ const Product = ({ detail, view, close, setClose,user }) => {
                 success();
             } else {
                 error(data.message);
+            }
+        }).catch((err) => {
+            error();
+        })
+    }
+    const like = (value) =>{
+        if(!user.id && !localStorage.getItem('token')){
+            usenavigate('/login');
+        }
+        let user_id = user.id;
+        let product_id = value.id;
+        fetch('http://127.0.0.1:8000/api/user/wishlist ', {
+            method: "POST",
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify({ user_id, product_id})
+        }).then(res => res.json()).then(data => {
+            if (data.success) {
+                successview();
+            } else {
+                errorview(data.message);
             }
         }).catch((err) => {
             error();
@@ -145,7 +177,7 @@ const Product = ({ detail, view, close, setClose,user }) => {
                                                             <div className='icon'>
                                                                 <li onClick={() => addtocart(value)}><AiOutlineShoppingCart /></li>
                                                                 <li onClick={() => view(value)}><BsEye /></li>
-                                                                <li><AiOutlineHeart /></li>
+                                                                <li onClick={() => like(value)}><AiOutlineHeart /></li>
                                                             </div>
                                                         </div>
                                                         <div className='detail'>
