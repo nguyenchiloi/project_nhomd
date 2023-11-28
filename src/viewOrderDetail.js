@@ -2,15 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { Anchor, Col, Image, Menu, Row, Tabs } from 'antd';
 import axios from 'axios';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import BtnCancelOrder from './btnCancelOrder';
 const ViewOrderDetail = (user) => {
   const [listProductOrder, setListProductOrder] = useState([]);
-  useEffect(() => {
+  const orderapi = () =>{
     axios.post(`http://127.0.0.1:8000/api/user/orders`, {
       user_id: user.user.id
     }).then(res => {
       const persons = res.data.data.orders;
       setListProductOrder(persons);
     }).catch(error => console.log(error));
+  }
+  useEffect(() => {
+    orderapi()
   }, []);
   const items = [
     {
@@ -69,6 +73,7 @@ const ViewOrderDetail = (user) => {
                   )
                 })}
                 <h2>Tổng tiền tất cả sản phẩm: {value.total_money} $</h2>
+                <BtnCancelOrder user={user} order_id={value.order_id} orderapi={orderapi}/>
               </div>
               : ''}
           </>
