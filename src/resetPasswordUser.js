@@ -34,7 +34,7 @@ const ResetPasswordUser = () => {
          headers:{Authorization: `Bearer ${token}`},
          data:ob
       }
-      ).then(res => res.json()).then(data => {
+      ).then(res) => {
          // if (data.status === 200) {
          //    success();
          //    form.resetFields();
