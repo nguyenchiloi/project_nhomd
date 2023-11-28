@@ -34,13 +34,13 @@ const ResetPasswordUser = () => {
          headers:{Authorization: `Bearer ${token}`},
          data:ob
       }
-      ).then(res) => {
-         // if (data.status === 200) {
-         //    success();
-         //    form.resetFields();
-         // } else {
-         //    error(data.message);
-         // }
+      ).then(res => res.json()).then(data => {
+         if (data.status === 200) {
+            success();
+            form.resetFields();
+         } else {
+            error(data.message);
+         }
          console.log(data);
       }).catch((err) => {
          error();
