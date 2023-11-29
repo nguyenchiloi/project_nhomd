@@ -118,7 +118,7 @@ const BtnEditNews = ({ _ ,id,newsapi}) => {
                                 label="Tiêu đề:"
                                 rules={[{ required: true, message: 'vui lòng nhập tên tin tức' }]}
                             >
-                                <Input placeholder="Nhập tiêu đề" name="title" onChange={e => setTitleProduct(e.target.value)} />
+                                <Input maxLength={50} placeholder="Nhập tiêu đề" name="title" onChange={e => setTitleProduct(e.target.value)} />
                             </Form.Item>
                         </Col>
                         <Col xl={24} lg={24} md={24} sm={24} xs={24}>
@@ -127,7 +127,7 @@ const BtnEditNews = ({ _ ,id,newsapi}) => {
                                 label="Mô tả"
                                 rules={[{ required: true, message: 'vui lòng nhập mô tả' }]}
                             >
-                                <TextArea placeholder="Nhập mô tả" name="description" onChange={e => setDescription(e.target.value)}/>
+                                <TextArea maxLength={500} placeholder="Nhập mô tả" name="description" onChange={e => setDescription(e.target.value)}/>
                             </Form.Item>
                         </Col>
                         <Col xl={24} lg={24} md={24} sm={24} xs={24}>

@@ -78,7 +78,7 @@ const BtnEditUser = ({ _, id, usersapi }) => {
                                 label="Tên danh mục:"
                                 rules={[{ required: true, message: 'vui lòng nhập tên danh mục' }]}
                             >
-                                <Input placeholder="Nhập tên danh mục" name="name" onChange={e => setNameCategory(e.target.value)} />
+                                <Input maxLength={50} placeholder="Nhập tên danh mục" name="name" onChange={e => setNameCategory(e.target.value)} />
                             </Form.Item>
                         </Col>
                         <Col xl={24} lg={24} md={24} sm={24} xs={24}>
@@ -92,7 +92,7 @@ const BtnEditUser = ({ _, id, usersapi }) => {
                                     message: "Email không hợp lệ",
                                 },
                             ]} name="email" >
-                                <Input size="large" placeholder="Nhập gmail" prefix={<UserOutlined />} name="email" value={email} onChange={e => setGmail(e.target.value)} />
+                                <Input maxLength={100} size="large" placeholder="Nhập gmail" prefix={<UserOutlined />} name="email" value={email} onChange={e => setGmail(e.target.value)} />
                             </Form.Item>
                         </Col>
                         <Col xl={24} lg={24} md={24} sm={24} xs={24}>

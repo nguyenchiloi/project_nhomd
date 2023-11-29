@@ -130,7 +130,7 @@ const BtnAddProduct = ({ productapi }) => {
                                 label="Tên sản phẩm:"
                                 rules={[{ required: true, message: 'vui lòng nhập tên sản phẩm' }]}
                             >
-                                <Input placeholder="Nhập tên sản phẩm" name="name" onChange={e => setNameProduct(e.target.value)} />
+                                <Input maxLength={50} placeholder="Nhập tên sản phẩm" name="name" onChange={e => setNameProduct(e.target.value)} />
                             </Form.Item>
                         </Col>
                         <Col xl={24} lg={24} md={24} sm={24} xs={24}>
@@ -186,7 +186,7 @@ const BtnAddProduct = ({ productapi }) => {
                                 label="Mô tả"
                                 rules={[{ required: true, message: 'vui lòng nhập mô tả' }]}
                             >
-                                <TextArea placeholder="Nhập mô tả" name="description" onChange={e => setDescription(e.target.value)}></TextArea>
+                                <TextArea maxLength={500} placeholder="Nhập mô tả" name="description" onChange={e => setDescription(e.target.value)}></TextArea>
                             </Form.Item>
                         </Col>
                     </Row>

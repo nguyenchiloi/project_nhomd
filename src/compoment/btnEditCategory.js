@@ -69,7 +69,7 @@ const BtnEditCategory = ({_,id, categoryapi }) => {
                                 label="Tên danh mục:"
                                 rules={[{ required: true, message: 'vui lòng nhập tên danh mục' }]}
                             >
-                                <Input placeholder="Nhập tên danh mục" name="name" onChange={e => setNameCategory(e.target.value)} />
+                                <Input maxLength={50} placeholder="Nhập tên danh mục" name="name" onChange={e => setNameCategory(e.target.value)} />
                             </Form.Item>
                         </Col>
                     </Row>

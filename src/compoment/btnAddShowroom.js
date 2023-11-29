@@ -104,7 +104,7 @@ const BtnAddShowroom = ({showroomapi}) => {
                                 label="Tên cửa hàng:"
                                 rules={[{ required: true, message: 'vui lòng nhập tên cửa hàng' }]}
                             >
-                                <Input placeholder="Nhập tên cửa hàng" name="name" onChange={e => setNameProduct(e.target.value)} />
+                                <Input maxLength={100} placeholder="Nhập tên cửa hàng" name="name" onChange={e => setNameProduct(e.target.value)} />
                             </Form.Item>
                         </Col>
                         <Col xl={24} lg={24} md={24} sm={24} xs={24}>
@@ -113,7 +113,7 @@ const BtnAddShowroom = ({showroomapi}) => {
                                 label="Địa chỉ"
                                 rules={[{ required: true, message: 'vui lòng nhập địa chỉ' }]}
                             >
-                                <Input placeholder="Nhập địa chỉ" name="address" onChange={e => setAddress(e.target.value)}></Input>
+                                <Input maxLength={255} placeholder="Nhập địa chỉ" name="address" onChange={e => setAddress(e.target.value)}></Input>
                             </Form.Item>
                         </Col>
                         <Col xl={24} lg={24} md={24} sm={24} xs={24}>
@@ -122,7 +122,7 @@ const BtnAddShowroom = ({showroomapi}) => {
                                 label="Thời gian làm việc"
                                 rules={[{ required: true, message: 'vui lòng nhập thời gian làm việc' }]}
                             >
-                                <Input placeholder="Nhập thời gian làm việc" name="time" onChange={e => setTime(e.target.value)}></Input>
+                                <Input maxLength={150} placeholder="Nhập thời gian làm việc" name="time" onChange={e => setTime(e.target.value)}></Input>
                             </Form.Item>
                         </Col>
                         <Col xl={24} lg={24} md={24} sm={24} xs={24}>

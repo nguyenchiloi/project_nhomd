@@ -88,7 +88,7 @@ const BtnReplyContact = ({ _, contactsapi }) => {
                                 label="Trả lời"
                                 rules={[{ required: true, message: 'vui lòng nhập trả lời' }]}
                             >
-                                <TextArea placeholder="Nhập câu trả lời"  onChange={e => setMessage(e.target.value)} />
+                                <TextArea maxLength={500} placeholder="Nhập câu trả lời"  onChange={e => setMessage(e.target.value)} />
                             </Form.Item>
                         </Col>
 
