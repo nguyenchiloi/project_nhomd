@@ -14,19 +14,31 @@ import axios from 'axios';
 const Home = ({ detail, view, close, setClose, user }) => {
   const [product, setProduct] = useState([]);
   const [messageApi, contextHolder] = message.useMessage();
-    const usenavigate = useNavigate();
-    const success = () => {
-        messageApi.open({
-            type: 'success',
-            content: 'Thêm sản phẩm thành công',
-        });
-    };
-    const error = (message) => {
-        messageApi.open({
-            type: 'error',
-            content: message ? message : 'Thêm sản phẩm thất bại',
-        });
-    };
+  const usenavigate = useNavigate();
+  const success = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'Thêm sản phẩm thành công',
+    });
+  };
+  const error = (message) => {
+    messageApi.open({
+      type: 'error',
+      content: message ? message : 'Thêm sản phẩm thất bại',
+    });
+  };
+  const successview = () => {
+    messageApi.open({
+        type: 'success',
+        content: 'Thêm sản phẩm yêu thích thành công',
+    });
+};
+const errorview = (message) => {
+    messageApi.open({
+        type: 'error',
+        content: message ? message : 'Thêm sản phẩm yêu thích thất bại',
+    });
+};
   useEffect(() => {
     axios.get(`http://127.0.0.1:8000/api/products?limit=8`)
       .then(res => {
@@ -36,27 +48,47 @@ const Home = ({ detail, view, close, setClose, user }) => {
       .catch(error => console.log(error));
   }, [])
   const addtocart = (value) => {
-    if(!user.id && !localStorage.getItem('token')){
-        usenavigate('/login');
+    if (!user.id && !localStorage.getItem('token')) {
+      usenavigate('/login');
     }
     let user_id = user.id;
     let product_id = value.id;
     let money = value.money;
     let quantity = 1;
     fetch('http://127.0.0.1:8000/api/add-to-cart', {
-        method: "POST",
-        headers: { 'content-Type': 'application/json' },
-        body: JSON.stringify({ user_id, product_id, money, quantity })
+      method: "POST",
+      headers: { 'content-Type': 'application/json' },
+      body: JSON.stringify({ user_id, product_id, money, quantity })
     }).then(res => res.json()).then(data => {
-        if (data.success) {
-            success();
-        } else {
-            error(data.message);
-        }
+      if (data.success) {
+        success();
+      } else {
+        error(data.message);
+      }
     }).catch((err) => {
-        error();
+      error();
     })
-}
+  }
+  const like = (value) => {
+    if (!user.id && !localStorage.getItem('token')) {
+      usenavigate('/login');
+    }
+    let user_id = user.id;
+    let product_id = value.id;
+    fetch('http://127.0.0.1:8000/api/user/wishlist ', {
+      method: "POST",
+      headers: { 'content-Type': 'application/json' },
+      body: JSON.stringify({ user_id, product_id })
+    }).then(res => res.json()).then(data => {
+      if (data.success) {
+        successview();
+      } else {
+        errorview(data.message);
+      }
+    }).catch((err) => {
+      error();
+    })
+  }
   return (
     <>{contextHolder}
       {
@@ -192,13 +224,13 @@ const Home = ({ detail, view, close, setClose, user }) => {
                       <div className='icon'>
                         <li onClick={() => addtocart(value)}><AiOutlineShoppingCart /></li>
                         <li onClick={() => view(value)}><BsEye /></li>
-                        <li><AiOutlineHeart /></li>
+                        <li onClick={() => like(value)}><AiOutlineHeart /></li>
                       </div>
                     </div>
                     <div className='detail'>
-                      <p>{value.category.name}</p>
+                      <Link to={`/productdetail/${value.id}`}><p>{value.category.name}</p>
                       <h3>{value.name}</h3>
-                      <h4>${value.money}</h4>
+                      <h4>${value.money}</h4></Link>
                     </div>
                   </div>
                 </Col>
