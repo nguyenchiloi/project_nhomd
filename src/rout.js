@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route} from 'react-router-dom'
+import { Routes, Route, useParams} from 'react-router-dom'
 import Home from './home'
 import Product from './product'
 import Cart from './cart'
@@ -35,7 +35,7 @@ const Rout = ({setIsAuthen, detail, view, close, setClose, userapi, user}) => {
         <Route path='/showroom' element={<Showroom/>}/>
         <Route path='/guarantee' element={<Guarantee/>}/>
         <Route path='/news' element={<News/>}/>
-        <Route path='/productdetail' element={<ProductDetail/>}/>
+        <Route path='/productdetail/:id' element={<ProductDetail user={user}/>} />
     </Routes>
     </>
   )

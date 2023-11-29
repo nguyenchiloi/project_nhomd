@@ -1,17 +1,112 @@
-import { Button, Col, Image, Row } from "antd";
+import { Button, Col, Image, Rate, Row, message } from "antd";
 import './productdetail.css'
-const ProductDetail = () => {
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import TextArea from "antd/es/input/TextArea";
+import BtnRate from "./btnRate";
+const ProductDetail = ({ user }) => {
+    const { id } = useParams();
+    const [product, setProduct] = useState([]);
+    const [comment, setComment] = useState("");
+    const usenavigate = useNavigate();
+    const [messageApi, contextHolder] = message.useMessage();
+    const success = () => {
+        messageApi.open({
+            type: 'success',
+            content: 'Bình luận thành công',
+        });
+    };
+    const error = (message) => {
+        messageApi.open({
+            type: 'error',
+            content: message ? message : 'Bình luận thất bại',
+        });
+    };
+    useEffect(() => {
+        axios.get(`http://127.0.0.1:8000/api/products/${id}`)
+            .then(res => {
+                const persons = res.data;
+                setProduct(persons);
+            })
+            .catch(error => console.log(error));
+    }, []);
+    let moneylen = product.money + 1000;
+    const [listcomment, setListComment] = useState([]);
+    const commentapi = () => {
+        axios.get(`http://127.0.0.1:8000/api/global/getAllComment/${id}`)
+            .then(res => {
+                const persons = res.data.data;
+                setListComment(persons);
+            })
+            .catch(error => console.log(error));
+    }
+    const [star, setStar] = useState([]);
+    const starapi = () => {
+        axios.get(`http://127.0.0.1:8000/api/getAllRating/${id}`)
+            .then(res => {
+                const persons = res.data.data;
+                setStar(persons);
+            })
+            .catch(error => console.log(error));
+    }
+    useEffect(() => {
+        commentapi();
+        starapi();
+    }, []);
+    const handlesubmitcomment = () => {
+        let user_id = user.id;
+        let product_id = id;
+        fetch('http://127.0.0.1:8000/api/global/comment/', {
+            method: "POST",
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify({ user_id, product_id, comment })
+        }).then(res => res.json()).then(data => {
+            if (data.success) {
+                success();
+                commentapi();
+            } else {
+                error(data.message);
+            }
+        }).catch((err) => {
+            error();
+        })
+    }
+    const addtocart = () => {
+        if(!user.id && !localStorage.getItem('token')){
+            usenavigate('/login');
+        }
+        let user_id = user.id;
+        let product_id = product.id;
+        let money = product.money;
+        let quantity = 1;
+        fetch('http://127.0.0.1:8000/api/add-to-cart', {
+            method: "POST",
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify({ user_id, product_id, money, quantity })
+        }).then(res => res.json()).then(data => {
+            if (data.success) {
+                success();
+            } else {
+                error(data.message);
+            }
+        }).catch((err) => {
+            error();
+        })
+    }
     return (
         <>
+            {contextHolder}
             <div className="content">
                 <Row>
-                    <Col span={10}>
-                        <Image src="./img/b1.png" width={500} />
+                    <Col span={9}>
+                        <Image src={`/img/${product.photo}`} width={500} height={500}/>
                     </Col>
                     <Col span={12}>
-                        <h1>Tên sản phẩm</h1>
-                        <div className="money">Giá bán: 1235645 $</div>
-                        <div className="description">Mô tả: adasdasd ducwdweeqwdcq qưdqw  qưewqdqwds</div>
+                        <h1>{product.name}</h1>
+                        <div className="money">Giá bán: {product.money} $ - <span>{moneylen} $</span></div>
+                        <div className="description">Mô tả: {product.description}</div>
+                        <Button type="primary" size="large" style={{marginTop: 10, background: "black"}} onClick={()=>addtocart()}>Thêm vào giỏ hàng</Button>
                         <div className="promotion">
                             <h3>Khuyễn mãi - Đại hạ giá
                                 <p>Giá và khuyến mãi dự kiến áp dụng đến 23:00 | 30/12</p>
@@ -32,6 +127,34 @@ const ProductDetail = () => {
                         </div>
                     </Col>
                 </Row>
+                <Row>
+                    <div className="comment">
+                        <TextArea placeholder="Nhập nội dung bình luận" style={{ width: 990 }} value={comment} onChange={(e) => setComment(e.target.value)} />
+                        <div className="btn-comment">
+                            <Button type="primary" size="large" onClick={() => handlesubmitcomment()}>Gửi</Button>
+                        </div>
+                        {listcomment.map((value, index) => {
+                            return (
+                                <div className="khung-comment" id={index.id}>
+                                    <h3 className="name-comment">{value.user.name}</h3>
+                                    <div className="noidung-comment">{value.comment}</div>
+                                </div>
+                            )
+                        })}
+                    </div>
+
+                </Row>
+                <div className="rate">
+                    <div><BtnRate user={user} product_id={id} starapi={starapi} /></div>
+                    {star.map((v, i) => {
+                        return (
+                            <div className="khung-rate" id={i.id}>
+                                <h3 className="name-rate">{v.user.name}</h3>
+                                <div className="noidung-rate"><Rate value={v.stars}/></div>
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
 
         </>

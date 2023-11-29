@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Anchor, Col, Image, Menu, Row, Tabs } from 'antd';
+import { Image, Tabs } from 'antd';
 import axios from 'axios';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import BtnCancelOrder from './btnCancelOrder';
 const ViewOrderDetail = (user) => {
   const [listProductOrder, setListProductOrder] = useState([]);
@@ -14,13 +13,12 @@ const ViewOrderDetail = (user) => {
     }).catch(error => console.log(error));
   }
   useEffect(() => {
-    orderapi()
+    orderapi();
   }, []);
   const items = [
     {
       label: 'Hủy đơn hàng',
       key: '1',
-      icon: <MailOutlined />,
       children: <>{listProductOrder.map((value, index) => {
         return (
           <>
@@ -52,7 +50,6 @@ const ViewOrderDetail = (user) => {
     {
       label: 'Chờ xác nhận',
       key: '2',
-      icon: <MailOutlined />,
       children: <>{listProductOrder.map((value, index) => {
         return (
           <>
@@ -83,7 +80,6 @@ const ViewOrderDetail = (user) => {
     {
       label: 'Đang vận chuyển',
       key: '3',
-      icon: <MailOutlined />,
       children: <>{listProductOrder.map((value, index) => {
         return (
           <>
@@ -113,7 +109,6 @@ const ViewOrderDetail = (user) => {
     {
       label: 'Đã nhận hàng',
       key: '4',
-      icon: <MailOutlined />,
       children: <>{listProductOrder.map((value, index) => {
         return (
           <>
@@ -141,10 +136,6 @@ const ViewOrderDetail = (user) => {
       })}</>,
     },
   ];
-  const [current, setCurrent] = useState('1');
-  const onClick = (e) => {
-    setCurrent(e.key);
-  };
   return (
     <>
 

@@ -24,7 +24,7 @@ const News = () => {
     }, [])
     return (
         <>
-            <div className="news" style={{ textAlign: "center", color: "white", padding: "20px 50px 80px 50px", background: "#2b2b2b", borderBottom: "#9a9a9a solid 1px" }}>
+            <div className="news" style={{ textAlign: "center", color: "white", padding: "20px", background: "#2b2b2b", borderBottom: "#9a9a9a solid 1px" }}>
                 <h1 style={{ padding: 50, fontSize: 50 }}>Tin Tức Công Nghệ</h1>
                 <Row className="hotNews" justify="center" align="top" gutter={[16, 16]}>
                     <Col span={12}>
@@ -59,7 +59,7 @@ const News = () => {
                                         <Col flex={2} style={{ padding: 10 }}>
                                             <div>
                                                 <Image style={{ border: "white solid 1px", borderRight: "none" }} className="pic"
-                                                    width="100%"
+                                                    width={200}
                                                     height={144}
                                                     src={`./img/${value.photo}`}
                                                 />

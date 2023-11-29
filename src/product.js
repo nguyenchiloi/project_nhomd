@@ -181,7 +181,7 @@ const Product = ({ detail, view, close, setClose, user }) => {
                                                             </div>
                                                         </div>
                                                         <div className='detail'>
-                                                            <Link to={'/'}>
+                                                            <Link to={`/productdetail/${value.id}`}>
                                                                 <p>{value.category.name}</p>
                                                                 <h3>{value.name}</h3>
                                                                 <h4>${value.money}</h4>

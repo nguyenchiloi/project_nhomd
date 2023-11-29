@@ -26,7 +26,7 @@ const Nav = ({ isAuthen, setIsAuthen,setUser }) => {
         <>
             <div className='free'>
                 <div className='logo'>
-                    <img src='./img/logo-cnsg.png' width={150} alt='logo'></img>
+                    <img src='/img/logo-cnsg.png' width={150} alt='logo'></img>
                 </div>
             </div>
             <div className='main_header'>
