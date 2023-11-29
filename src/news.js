@@ -56,7 +56,7 @@ const News = () => {
                             return (
                                 <div className="bornew">
                                     <Row className="new">
-                                        <Col flex={2} style={{ padding: 10 }}>
+                                        <Col flex={2} style={{ padding: 10, width:"30%" }}>
                                             <div>
                                                 <Image style={{ border: "white solid 1px", borderRight: "none" }} className="pic"
                                                     width="100%"
@@ -67,7 +67,7 @@ const News = () => {
                                         </Col>
                                         <Col flex={3} className="bo" style={{ padding: 10 }}>
                                             <div className="newName">{value.title}</div>
-                                            <p className="newsbody">{value.description}</p>
+                                            <p className="newsbody">{value.slug}</p>
                                             <div className="date">{date.format('DD/MM/yyyy')}</div>
                                         </Col>
                                     </Row>

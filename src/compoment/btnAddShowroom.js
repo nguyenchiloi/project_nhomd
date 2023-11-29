@@ -27,13 +27,13 @@ const BtnAddShowroom = ({showroomapi}) => {
     const success = () => {
         messageApi.open({
             type: 'success',
-            content: 'Thêm cửa hàng thành công',
+            content: 'Thêm showroom thành công',
         });
     };
     const error = (message) => {
         messageApi.open({
             type: 'error',
-            content: message ? message : 'Thêm cửa hàng thất bại',
+            content: message ? message : 'Thêm showroom thất bại',
         });
     };
     const handlesubmit = (e) => {

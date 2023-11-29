@@ -76,3 +76,42 @@ h1{
     background-color: black;
     color: white;
 }
+.comment{
+    background-color: #423f3e;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,.1), 0 2px 6px 2px rgba(60,64,67,.15);
+    margin-top: 15px;
+    padding: 10px;
+    width: 77%;
+}
+.nameu{
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+.list_comment{
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+.repcmtt:hover{
+    color: #03cac9;
+}
+.repcmtt{
+    border: none;
+    background-color: white;
+    margin-left: 930px;
+    color: black;
+    font-size: 13px;
+}
+.contentP{
+    border: none;
+    color: black;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,.1), 0 2px 6px 2px rgba(60,64,67,.15);
+    overflow: hidden;
+    width: 1035px;
+    padding: 10px;
+    margin-left: 20px;
+    
+}

@@ -55,7 +55,7 @@ const BtnEditCategory = ({_,id, categoryapi }) => {
             {contextHolder}
             <Button size="large" type="primary" style={{ backgroundColor: "#ff9c00" }} icon={<EditOutlined />} onClick={showModal}>Sửa</Button>
             <Modal
-                title="Thêm danh mục"
+                title="Sửa danh mục"
                 open={isModalVisible}
                 maskClosable={false}
                 onCancel={handleCancel}

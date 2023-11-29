@@ -32,16 +32,6 @@ const ResetPasswordUser = () => {
          headers:{Authorization: `Bearer ${token}`},
          data:ob
       }
-<<<<<<< HEAD
-      ).then(res => res.json()).then(data => {
-         if (data.status === 200) {
-            success();
-            form.resetFields();
-         } else {
-            error(data.message);
-         }
-         console.log(data);
-=======
       ).then(res => {
          if (res.status === 200) {
             success();
@@ -49,7 +39,6 @@ const ResetPasswordUser = () => {
          } else {
             error();
          }
->>>>>>> 490cd30613ffb6fba790624c9f92962abe500206
       }).catch((err) => {
          error();
       })

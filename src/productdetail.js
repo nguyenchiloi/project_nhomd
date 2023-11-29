@@ -1,5 +1,6 @@
-import { Button, Col, Image, Row } from "antd";
+import { Button, Col, Image, Input, Row } from "antd";
 import './productdetail.css'
+import { CommentOutlined } from "@ant-design/icons";
 const ProductDetail = () => {
     return (
         <>
@@ -32,6 +33,28 @@ const ProductDetail = () => {
                         </div>
                     </Col>
                 </Row>
+                <div className="comment">
+                    <Col span={12}>Nhập câu hỏi tại đây</Col>
+                    <div style={{ display: "flex", margin:10}}>
+                        <textarea style={{ width: "100%", marginRight: 10, borderRadius:5,padding:10}} type="textarea"></textarea>
+                        <Button style={{background:"black",color:"white"}} htmlType="submit" className="btn-contact" size="large">Gửi</Button>
+                    </div>
+                    <div style={{borderBottom:"white solid 1px" , margin:10}}></div>
+                    <div className="list_comment">
+                        <div className="nameu">Lê Thanh Duy</div>
+                        <div className="contentP">
+                            <p>Máy gì mà xịn quá vậy shop, tôi mua 1 lần 10 cái rồi</p>
+                            <Button className="repcmtt"><CommentOutlined/>Trả lời</Button>
+                        </div>
+                    </div>
+                    <div className="list_comment">
+                        <div className="nameu">Nguyễn Chí Lợi</div>
+                        <div className="contentP">
+                            <p>Máy tốt, giá mềm, rất phù hợp với điều kiện của tôi</p>
+                            <Button className="repcmtt"><CommentOutlined/>Trả lời</Button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </>
