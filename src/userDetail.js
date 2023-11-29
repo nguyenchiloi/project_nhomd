@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import {
+  LockOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UploadOutlined,
+  UnorderedListOutlined,
   UserOutlined,
-  VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
+import ResetPasswordUser from './resetPasswordUser';
+import UserInformation from './userInformation';
+import ViewOrderDetail from './viewOrderDetail';
 const { Header, Sider, Content } = Layout;
-const UserDetail = () => {
+
+const UserDetail = ({ user }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [content, setContent] = useState(1);
   const {
@@ -26,19 +30,19 @@ const UserDetail = () => {
             {
               key: '1',
               icon: <UserOutlined />,
-              label: 'nav 1',
+              label: 'Thông tin người dùng',
               onClick: () => setContent(1),
             },
             {
               key: '2',
-              icon: <VideoCameraOutlined />,
-              label: 'nav 2',
+              icon: <LockOutlined />,
+              label: 'Thay đổi mật khẩu',
               onClick: () => setContent(2),
             },
             {
               key: '3',
-              icon: <UploadOutlined />,
-              label: 'nav 3',
+              icon: <UnorderedListOutlined />,
+              label: 'Xem chi tiết đơn hàng',
               onClick: () => setContent(3),
             },
           ]}
@@ -70,6 +74,7 @@ const UserDetail = () => {
             background: colorBgContainer,
           }}
         >
+          {content === 1 ? <UserInformation user={user} /> : content === 2 ? <ResetPasswordUser /> : content === 3 ? <ViewOrderDetail user={user} />: ''}
         </Content>
       </Layout>
     </Layout>

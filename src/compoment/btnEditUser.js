@@ -64,7 +64,7 @@ const BtnEditUser = ({ _, id, usersapi }) => {
             {contextHolder}
             <Button size="large" type="primary" style={{ backgroundColor: "#ff9c00" }} icon={<EditOutlined />} onClick={showModal}>Sửa</Button>
             <Modal
-                title="Thêm danh mục"
+                title="Sửa thông tin người dùng"
                 open={isModalVisible}
                 maskClosable={false}
                 onCancel={handleCancel}

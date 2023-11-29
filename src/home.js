@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { BsArrowRight } from 'react-icons/bs';
 import { FiTruck } from 'react-icons/fi';
 import { BsCurrencyDollar } from 'react-icons/bs';
@@ -9,10 +9,24 @@ import { AiOutlineShoppingCart, AiOutlineCloseCircle } from 'react-icons/ai';
 import { BsEye } from 'react-icons/bs';
 import { AiOutlineHeart } from 'react-icons/ai';
 import './home.css';
-import { Row, Col, Image } from 'antd';
+import { Row, Col, Image, message } from 'antd';
 import axios from 'axios';
-const Home = ({ detail, view, close, setClose, addtocart }) => {
-  const [product, setProduct] = useState([])
+const Home = ({ detail, view, close, setClose, user }) => {
+  const [product, setProduct] = useState([]);
+  const [messageApi, contextHolder] = message.useMessage();
+    const usenavigate = useNavigate();
+    const success = () => {
+        messageApi.open({
+            type: 'success',
+            content: 'Thêm sản phẩm thành công',
+        });
+    };
+    const error = (message) => {
+        messageApi.open({
+            type: 'error',
+            content: message ? message : 'Thêm sản phẩm thất bại',
+        });
+    };
   useEffect(() => {
     axios.get(`http://127.0.0.1:8000/api/products?limit=8`)
       .then(res => {
@@ -21,8 +35,30 @@ const Home = ({ detail, view, close, setClose, addtocart }) => {
       })
       .catch(error => console.log(error));
   }, [])
+  const addtocart = (value) => {
+    if(!user.id && !localStorage.getItem('token')){
+        usenavigate('/login');
+    }
+    let user_id = user.id;
+    let product_id = value.id;
+    let money = value.money;
+    let quantity = 1;
+    fetch('http://127.0.0.1:8000/api/add-to-cart', {
+        method: "POST",
+        headers: { 'content-Type': 'application/json' },
+        body: JSON.stringify({ user_id, product_id, money, quantity })
+    }).then(res => res.json()).then(data => {
+        if (data.success) {
+            success();
+        } else {
+            error(data.message);
+        }
+    }).catch((err) => {
+        error();
+    })
+}
   return (
-    <>
+    <>{contextHolder}
       {
         close ?
           <div className='product_detail'>

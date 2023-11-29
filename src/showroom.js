@@ -16,7 +16,7 @@ const Showroom = () => {
     return (
         <>
             <div className="showroom" style={{ textAlign: "center", color: "white", padding: "20px 50px 80px 50px", background: "#2b2b2b", borderBottom: "#9a9a9a solid 1px" }}>
-                <h1 style={{ padding: 50, fontSize: 50 }}>Hệ thống Showroom TP.HCM</h1>
+                <h1 style={{ padding: 50, fontSize: 50 }}>Hệ thống Showroom</h1>
 
                 {
                     listShowroom.map((value, index) => {

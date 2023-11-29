@@ -1,88 +1,163 @@
-const Productdetail =
-[
-    {
-        id:1,
-        Title:"Galaxy Tab S6 Lite 10.4-inch Android Tablet 128GB.",
-        Cat: 'Tablet',
-        Price: '723',
-        Img: './img/tp1.jpg'
-    },
-    {
-        id:2,
-        Title:"Tracker with IP67 Waterproof Pedometer Smart watch.",
-        Cat: 'Smart Watch',
-        Price: '168',
-        Img: './img/tp2.jpg'
-    },
-    {
-        id:3,
-        Title:"Cancelling Headphones Wireless.",
-        Cat: 'Headphone',
-        Price: '49',
-        Img: './img/tp3.jpg'
-    },
-    {
-        id:4,
-        Title:"Professional Camera 4K Digital Video Camera.",
-        Cat: 'Camera',
-        Price: '1049',
-        Img: './img/tp4.jpg'
-    },
-    {
-        id:5,
-        Title:"Mini Portable PD 22.5W Fast Charging Powerbank.",
-        Cat: 'Powerbank',
-        Price: '49',
-        Img: './img/tp5.jpg'
-    },
-    {
-        id:6,
-        Title:"CPU Cooler 2 Heat Pipes 12mm 4 Pin PWM RGB for Intel.",
-        Cat: 'Electronics',
-        Price: '156',
-        Img: './img/tp6.png'
-    },
-    {
-        id:7,
-        Title:"Playstation 4 2TB Slim Gaming Console.",
-        Cat: 'Gaming',
-        Price: '2098',
-        Img: './img/tp7.jpg'
-    },
-    {
-        id:8,
-        Title:"Mini Portable Mobile Phone Powerbank for iphone.",
-        Cat: 'Electronics',
-        Price: '386',
-        Img: './img/tp8.jpg'
-    },
-    {
-        id:9,
-        Title:"Microsoft Surface Pro 8-13' Touchscreen.",
-        Cat: 'Tablet',
-        Price: '693',
-        Img: './img/p9.jpg'
-    },
-    {
-        id:10,
-        Title:"Playstation 4 2TB Slim Gaming Console.",
-        Cat: 'Gaming',
-        Price: '5036',
-        Img: './img/p10.jpg'
-    },
-    {
-        id:11,
-        Title:"Echo Show 5 (2nd Gen) Adjustable Stand | Charcoal",
-        Cat: 'Electronics',
-        Price: '198',
-        Img: './img/p11.jpg'
-    },
-    {
-        id:12,
-        Title:"Echo Dot smart speaker",
-        Cat: 'Electronics',
-        Price: '793',
-        Img: './img/p12.jpg'
-    },
-]
-export default Productdetail;
+import { Button, Col, Image, Rate, Row, message } from "antd";
+import './productdetail.css'
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import TextArea from "antd/es/input/TextArea";
+import BtnRate from "./btnRate";
+const ProductDetail = ({ user }) => {
+    const { id } = useParams();
+    const [product, setProduct] = useState([]);
+    const [comment, setComment] = useState("");
+    const usenavigate = useNavigate();
+    const [messageApi, contextHolder] = message.useMessage();
+    const success = () => {
+        messageApi.open({
+            type: 'success',
+            content: 'Bình luận thành công',
+        });
+    };
+    const error = (message) => {
+        messageApi.open({
+            type: 'error',
+            content: message ? message : 'Bình luận thất bại',
+        });
+    };
+    useEffect(() => {
+        axios.get(`http://127.0.0.1:8000/api/products/${id}`)
+            .then(res => {
+                const persons = res.data;
+                setProduct(persons);
+            })
+            .catch(error => console.log(error));
+    }, []);
+    let moneylen = product.money + 1000;
+    const [listcomment, setListComment] = useState([]);
+    const commentapi = () => {
+        axios.get(`http://127.0.0.1:8000/api/global/getAllComment/${id}`)
+            .then(res => {
+                const persons = res.data.data;
+                setListComment(persons);
+            })
+            .catch(error => console.log(error));
+    }
+    const [star, setStar] = useState([]);
+    const starapi = () => {
+        axios.get(`http://127.0.0.1:8000/api/getAllRating/${id}`)
+            .then(res => {
+                const persons = res.data.data;
+                setStar(persons);
+            })
+            .catch(error => console.log(error));
+    }
+    useEffect(() => {
+        commentapi();
+        starapi();
+    }, []);
+    const handlesubmitcomment = () => {
+        let user_id = user.id;
+        let product_id = id;
+        fetch('http://127.0.0.1:8000/api/global/comment/', {
+            method: "POST",
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify({ user_id, product_id, comment })
+        }).then(res => res.json()).then(data => {
+            if (data.success) {
+                success();
+                commentapi();
+            } else {
+                error(data.message);
+            }
+        }).catch((err) => {
+            error();
+        })
+    }
+    const addtocart = () => {
+        if(!user.id && !localStorage.getItem('token')){
+            usenavigate('/login');
+        }
+        let user_id = user.id;
+        let product_id = product.id;
+        let money = product.money;
+        let quantity = 1;
+        fetch('http://127.0.0.1:8000/api/add-to-cart', {
+            method: "POST",
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify({ user_id, product_id, money, quantity })
+        }).then(res => res.json()).then(data => {
+            if (data.success) {
+                success();
+            } else {
+                error(data.message);
+            }
+        }).catch((err) => {
+            error();
+        })
+    }
+    return (
+        <>
+            {contextHolder}
+            <div className="content">
+                <Row>
+                    <Col span={9}>
+                        <Image src={`/img/${product.photo}`} width={500} height={500}/>
+                    </Col>
+                    <Col span={12}>
+                        <h1>{product.name}</h1>
+                        <div className="money">Giá bán: {product.money} $ - <span>{moneylen} $</span></div>
+                        <div className="description">Mô tả: {product.description}</div>
+                        <Button type="primary" size="large" style={{marginTop: 10, background: "black"}} onClick={()=>addtocart()}>Thêm vào giỏ hàng</Button>
+                        <div className="promotion">
+                            <h3>Khuyễn mãi - Đại hạ giá
+                                <p>Giá và khuyến mãi dự kiến áp dụng đến 23:00 | 30/12</p>
+
+                            </h3>
+                            <ul>
+                                <li> Vòng quay may mắn: Giảm thêm 50.000₫ đến 200.000₫</li>
+                                <li> Thu cũ Đổi mới: Giảm đến 2 triệu (Tuỳ model máy cũ, Không kèm thanh toán qua cổng online, mua kèm)</li>
+                                <li>Hoàn tiền nếu ở đâu rẻ hơn (Trong vòng 7 ngày; chỉ áp dụng tại siêu thị)</li>
+                                <li>Hư gì đổi nấy 12 tháng tại 3308 siêu thị trên toàn quốc</li>
+                                <li>Bảo hành chính hãng 1 năm</li>
+                            </ul>
+                        </div>
+                        <div className="promotionhssv">
+                            <h3>Giảm thêm hàng triệu đồng</h3>
+                            <div className="hssv">Đối với học sinh, sinh viên, giáo viên</div>
+                            <button>Mua ngay</button>
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <div className="comment">
+                        <TextArea placeholder="Nhập nội dung bình luận" style={{ width: 990 }} value={comment} onChange={(e) => setComment(e.target.value)} />
+                        <div className="btn-comment">
+                            <Button type="primary" size="large" onClick={() => handlesubmitcomment()}>Gửi</Button>
+                        </div>
+                        {listcomment.map((value, index) => {
+                            return (
+                                <div className="khung-comment" id={index.id}>
+                                    <h3 className="name-comment">{value.user.name}</h3>
+                                    <div className="noidung-comment">{value.comment}</div>
+                                </div>
+                            )
+                        })}
+                    </div>
+
+                </Row>
+                <div className="rate">
+                    <div><BtnRate user={user} product_id={id} starapi={starapi} /></div>
+                    {star.map((v, i) => {
+                        return (
+                            <div className="khung-rate" id={i.id}>
+                                <h3 className="name-rate">{v.user.name}</h3>
+                                <div className="noidung-rate"><Rate value={v.stars}/></div>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+
+        </>
+    )
+}
+export default ProductDetail;

@@ -3,7 +3,7 @@ import React, { useMemo, useState } from "react";
 import { UserOutlined } from '@ant-design/icons';
 import './login.css';
 import { Link, useNavigate } from "react-router-dom";
-const Login = ({ setIsAuthen }) => {
+const Login = ({ setIsAuthen, userapi }) => {
         
     const [email,setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -42,6 +42,7 @@ const Login = ({ setIsAuthen }) => {
                 }
                 if (data.data.type === 2) {
                     usenavigate('/');
+                    userapi();
                 }
             } else {
                 error(data.message);

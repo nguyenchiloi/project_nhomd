@@ -4,6 +4,7 @@ import { RiFacebookFill } from 'react-icons/ri';
 import { AiOutlineTwitter } from 'react-icons/ai';
 import { BsYoutube } from 'react-icons/bs';
 import './footer.css'
+import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <>
@@ -11,7 +12,7 @@ const Footer = () => {
         <div className='container'>
             <div className='about'>
                 <div className='logo'>
-                    <img src='./img/logo-cnsg.png' alt='logo'></img>
+                    <img src='/img/logo-cnsg.png' alt='logo'></img>
                 </div>
                 <div className='detail'>
                     <p>Hãy đến với công nghệ sài gòn để cập nhật công nghệ và mua những món hàng uy tín chất lượng</p>
@@ -23,23 +24,13 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <div className='account'>
-                <h3>My Account</h3>
-                <ul>
-                    <li>Account</li>
-                    <li>Order</li>
-                    <li>Cart</li>
-                    <li>shipping</li>
-                    <li>return</li>
-                </ul>
-            </div>
             <div className='page'>
-                <h3>Pages</h3>
+                <h3>Danh sách trang</h3>
                 <ul>
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Contact</li>
-                    <li>Terma & Condition</li>
+                    <li><Link to={'/'}>Trang chủ</Link></li>
+                    <li><Link to={'/product'}>Sản phẩm</Link></li>
+                    <li><Link to={'/contact'}>Liên hệ</Link></li>
+                    <li><Link to={'/showroom'}>Showroom</Link></li>
                 </ul>
             </div>
         </div>

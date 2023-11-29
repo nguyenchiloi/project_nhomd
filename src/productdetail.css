@@ -1,0 +1,130 @@
+
+.content{
+    padding-left: 25%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: #2b2b2b;
+    border-bottom: 1px solid gray;
+    color: white;
+}
+h1{
+    margin: 20px 0 20px 0;
+    width: 70%;
+}
+.money{
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.money span{
+    text-decoration: line-through;
+}
+.description{
+    font-size: 16px;
+    width: 70%;
+}
+.promotion{
+    width: 70%;
+    border: 3px solid white;
+    border-radius: 10px;
+    margin-top: 50px;
+}
+.promotion h3{
+    font-size: 22px;
+    font-style: italic;
+    padding: 5%;
+    background-color: yellow;
+    color: red;
+}
+.promotion h3 p{
+    font-size: 16px;
+    font-style: italic;
+    background-color: yellow;
+    color: black;
+}
+.promotion ul{
+    margin-left: 10%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.promotion ul li{
+    margin: 10px 0;
+}
+.promotionhssv{
+    width: 70%;
+    border-radius: 10px;
+    margin-top: 50px;
+    background-image: url(https://cdn.tgdd.vn/mwgcart/topzone/images/campaigns/backtoschool/bg-b2s-dt-min.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.promotionhssv h3 {
+    color: black;
+    font-size: 22px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+.promotionhssv .hssv{
+    color: black;
+    font-size: 16px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+.promotionhssv button{
+    font-size: 24px;
+    padding: 10px 15px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+}
+.comment{
+    margin-top: 50px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 20px;
+}
+.comment .btn-comment{
+    margin-top: 20px;
+}
+.comment .btn-comment button{
+    background-color: black !important;
+    color: white !important;
+    padding: 0 30px;
+}
+.khung-comment{
+    margin-top: 20px;
+}
+.noidung-comment{
+    background-color: white;
+    width: 990px;
+    height: 50px;
+    border-radius: 10px;
+    color: black;
+    padding-top: 15px;
+    padding-left: 10px;
+}
+.name-comment{
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+.rate{
+    margin-top: 50px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 20px;
+    width: 1032px;
+}
+.noidung-rate{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border: 1px solid gray;
+    padding: 20px;
+    width: 175px;
+    border-radius: 10px;
+    background-color: white;
+}

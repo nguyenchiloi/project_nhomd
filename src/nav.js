@@ -8,8 +8,7 @@ import { Button, Col, Input, Row, Dropdown, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import UserDetail from './userDetail';
 
-const Nav = ({ isAuthen, setIsAuthen }) => {
-    const [search, setSearch] = useState();
+const Nav = ({ isAuthen, setIsAuthen,setUser }) => {
     const usenavigate = useNavigate();
     const [token, setToken] = useState();
     useEffect(() => {
@@ -18,23 +17,16 @@ const Nav = ({ isAuthen, setIsAuthen }) => {
     let nameUser = localStorage.getItem('name');
     const items = [
         {
-            label: <Link to={'/userdetail'} key={1}>Thông tin người dùng</Link>,
-            key: '1',
-        },
-        {
-            label: <Link to={'/userdetail'}>Thay đổi mật khẩu</Link>,
-            key: '2',
-        },
-        {
-            label: 'Xem chi tiết đơn hàng',
-            key: '3',
+            label: <Link to={'/userdetail'} >Thông tin người dùng</Link>,
+            key: 1,
         },
     ];
+    
     return (
         <>
             <div className='free'>
                 <div className='logo'>
-                    <img src='./img/logo-cnsg.png' width={150} alt='logo'></img>
+                    <img src='/img/logo-cnsg.png' width={150} alt='logo'></img>
                 </div>
             </div>
             <div className='main_header'>
@@ -74,7 +66,7 @@ const Nav = ({ isAuthen, setIsAuthen }) => {
                                     }
                                 </Col>
                                 <Col md={3}>
-                                    <Link to="/"><AiOutlineHeart style={{ fontSize: 30, color: "white" }} /></Link>
+                                    <Link to="/like"><AiOutlineHeart style={{ fontSize: 30, color: "white" }} /></Link>
                                 </Col>
                                 <Col md={3}>
                                     <Link to="/cart"><BsBagCheck style={{ fontSize: 30, color: "white" }} /></Link>
@@ -88,7 +80,7 @@ const Nav = ({ isAuthen, setIsAuthen }) => {
                     <Col md={2}>
                         {
                             token ?
-                                <button onClick={() => { localStorage.removeItem('name'); localStorage.removeItem('type'); localStorage.removeItem('token'); usenavigate('/'); setToken(false); setIsAuthen(false) }} style={{ border: 'none', background: '#101010' }}><LogoutOutlined style={{ fontSize: 30, color: 'white' }} /> </button>
+                                <button onClick={() => { localStorage.removeItem('name'); localStorage.removeItem('type'); localStorage.removeItem('token'); usenavigate('/'); setToken(false); setIsAuthen(false);setUser([]) }} style={{ border: 'none', background: '#101010' }}><LogoutOutlined style={{ fontSize: 30, color: 'white' }} /> </button>
                                 :
                                 <Link to='/login'><span><LoginOutlined style={{ fontSize: 30, color: "white" }} /></span></Link>
                         }

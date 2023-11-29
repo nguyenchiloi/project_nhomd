@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import { Button, Image, Space, Table, message } from 'antd';
+import { Button, Image, Space, Table, Tag, message } from 'antd';
 import axios from "axios";
 import Paragraph from "antd/es/typography/Paragraph";
 import BtnDeleteNews from "./btnDeleteNews";
@@ -72,13 +72,25 @@ const ContactManager = () => {
                     </Paragraph>
                 </>
             ),
+            width:300
+        },
+        {
+            title: 'Trạng thái',
+            dataIndex: 'status',
+            key: 'status',
+            render: (_, record) => (
+                <>
+                {_ === 0 ?  <Tag color="green">Đã trả lời</Tag>:  <Tag color="gold">Chưa trả lời</Tag>}
+                </>
+            ),
+            align: 'center'
         },
         {
             title: 'Action',
             key: 'action',
             render: (_, record) => (
                 <Space direction="vertical" size="middle">
-                    <BtnReplyContact _={_} />
+                    <BtnReplyContact _={_} contactsapi={contactsapi}/>
                     <BtnDeleteContact id={record.id} contactsapi={contactsapi} />
                 </Space>
             ),
