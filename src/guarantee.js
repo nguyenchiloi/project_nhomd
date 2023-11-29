@@ -4,7 +4,7 @@ const Guarantee = () => {
     return (
         <>
             <div className="guarantee" style={{ color: "white", background: "#2b2b2b" }}>
-                <h1 style={{ textAlign: "center" }}>Chính sách bảo hành tại Công Nghệ Sài Gòn</h1>
+                <h1 style={{ textAlign: "center", paddingTop: 20 }}>Chính sách bảo hành tại Công Nghệ Sài Gòn</h1>
                 <h3>I. CÁC BƯỚC BẢO HÀNH SẢN PHẨM</h3>
                 <div className="fullStep">
                     <div className="buoc1">
